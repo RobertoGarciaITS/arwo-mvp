@@ -52,3 +52,23 @@ artifacts:
     path: qa/traceability/TRACEABILITY_MATRIX_GTC001_v0.1.csv
     type: traceability_matrix
     status: baseline
+  - id: ARWO-ARCH-003
+    path: architecture/ARWO_MASTER_PROJECT_CONTRACT_v0.2.yaml
+    type: master_project_contract
+    status: governing_baseline
+  - id: ARWO-ARCH-004
+    path: architecture/TECHNOLOGY_STACK_CONTRACT_v0.1.yaml
+    type: technology_stack_contract
+    status: governing_baseline
+  - id: ARWO-GOV-001
+    path: governance/ROLE_RESPONSIBILITY_MATRIX_v0.1.yaml
+    type: role_responsibility_matrix
+    status: governing_baseline
+  - id: ARWO-GOV-002
+    path: governance/MVP_REGISTRY_v0.1.yaml
+    type: mvp_registry
+    status: governing_baseline
+  - id: ARWO-ARCH-005
+    path: architecture/PHASE_02_RUNTIME_INTEGRATION_CONTRACT_v0.1.yaml
+    type: phase_contract
+    status: governing_baseline

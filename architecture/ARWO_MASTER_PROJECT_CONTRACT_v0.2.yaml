@@ -1,0 +1,311 @@
+contract:
+  id: ARWO-MASTER-PROJECT-CONTRACT
+  name: ARWO Master Project Contract
+  version: "0.2"
+  status: governing_baseline
+  source_of_truth: github
+
+project:
+  id: ARWO
+  name: AI Recruitment Workflow Orchestrator
+  purpose: >
+    Transform unstructured recruitment requisitions into standardized,
+    traceable, quality-controlled, human-approved recruitment artifacts and
+    controlled publication plans.
+  operating_model: human_in_the_loop
+  primary_language: English_for_artifacts
+  governance_language: Spanish_or_English
+
+scope:
+  in_scope:
+    - job requisition intake
+    - semantic normalization
+    - requirement classification
+    - screening questionnaire generation
+    - form build specification
+    - publication copy generation
+    - cross-artifact QA
+    - human approval
+    - controlled publication release gating
+    - auditability
+    - traceability
+    - runtime integrations in Phase 02
+  out_of_scope:
+    - autonomous final hiring decisions
+    - autonomous candidate rejection without explicit business rules
+    - psychometric inference
+    - protected-characteristic inference
+    - background checks
+    - payroll
+    - onboarding
+    - full ATS replacement
+    - storing candidate PII in GitHub
+
+use_cases:
+  - id: UC-001
+    name: Normalize job requisition
+    actor: recruiter
+    output: canonical_job_contract
+  - id: UC-002
+    name: Generate screening questionnaire
+    actor: recruiter
+    output: questionnaire_contract
+  - id: UC-003
+    name: Build application form specification
+    actor: system
+    output: form_build_spec
+  - id: UC-004
+    name: Generate publication copy
+    actor: recruiter
+    output: publication_contract
+  - id: UC-005
+    name: Run cross-artifact QA
+    actor: qa_orchestrator
+    output: qa_report
+  - id: UC-006
+    name: Human approval
+    actor: human_reviewer
+    output: approval_manifest
+  - id: UC-007
+    name: Controlled publication
+    actor: publisher_adapter
+    output: publication_execution_plan
+
+architecture_components:
+  - Job Normalizer
+  - Questionnaire Generator
+  - Form Builder
+  - Publication Generator
+  - QA Orchestrator
+  - Human Approval Orchestrator
+  - Controlled Publication Gate
+
+technology_stack:
+  source_control:
+    platform: GitHub
+    role:
+      - source_of_truth
+      - pull_requests
+      - versioning
+      - CI
+      - audit_history
+  language:
+    primary: Python
+    version_target: "3.12"
+    role:
+      - deterministic_validators
+      - build_spec_generation
+      - orchestration_logic
+  data_formats:
+    yaml:
+      use:
+        - contracts
+        - policies
+        - project_state
+        - test_definitions
+        - audit_reports
+    json:
+      use:
+        - JSON_Schema
+        - generated_machine_payloads
+    markdown:
+      use:
+        - skills
+        - prompts
+        - architecture_documentation
+    csv:
+      use:
+        - traceability_matrices
+  ci_cd:
+    platform: GitHub Actions
+    role:
+      - deterministic_tests
+      - quality_gates
+  google_workspace:
+    Google_Forms:
+      role: candidate_application_form
+      integration_phase: PHASE-02
+    Google_Drive:
+      role: operational_artifact_and_candidate_document_storage
+      integration_phase: PHASE-02
+    Gmail:
+      role: approval_and_review_notifications
+      integration_phase: PHASE-02
+  cloud:
+    target: GCP
+    services_planned:
+      - Secret Manager
+      - Cloud Run_or_Cloud_Functions
+      - Logging
+      - optional_datastore
+    integration_phase: PHASE-02
+  external_publication:
+    LinkedIn:
+      role: controlled_publication_channel
+      integration_phase: PHASE-02
+      restriction: real_post_requires_real_human_approval
+
+repository_file_classes:
+  architecture:
+    extensions: [yaml, md]
+    purpose: system_design_and_project_contracts
+  contracts:
+    extensions: [yaml]
+    purpose: canonical_interfaces_and_business_rules
+  schemas:
+    extensions: [json]
+    purpose: machine_validation
+  policies:
+    extensions: [yaml]
+    purpose: deterministic_governance
+  agents:
+    extensions: [yaml]
+    purpose: agent_responsibilities_and_boundaries
+  skills:
+    extensions: [md]
+    purpose: reusable_execution_instructions
+  prompts:
+    extensions: [md]
+    purpose: LLM_behavior_contracts
+  integrations:
+    extensions: [yaml, py]
+    purpose: external_adapter_contracts_and_runtime_code
+  scripts:
+    extensions: [py]
+    purpose: deterministic_generation_validation_and_orchestration
+  tests:
+    extensions: [yaml, json, txt]
+    purpose: golden_and_unit_tests
+  audit:
+    extensions: [yaml, json]
+    purpose: evidence_and_gate_results
+  governance:
+    extensions: [yaml]
+    purpose: project_state_registries_and_repository_controls
+
+code_policy:
+  ai_used_for:
+    - semantic_extraction
+    - controlled_generation
+    - language_transformation
+  deterministic_code_used_for:
+    - schemas
+    - validation
+    - hashing
+    - state_transitions
+    - traceability
+    - approval_binding
+    - release_gates
+    - API_payload_construction
+  prohibited:
+    - secrets_in_source
+    - candidate_pii_in_repository
+    - direct_main_writes
+    - external_publication_without_gate_07
+    - changing_approved_artifacts_after_approval
+
+roles:
+  business:
+    hiring_manager:
+      responsibilities:
+        - define_business_need
+        - review_role_requirements
+    recruiter:
+      responsibilities:
+        - submit_requisition
+        - review_generated_material
+    hr_reviewer:
+      responsibilities:
+        - privacy_and_policy_review
+        - approval_decision
+  technical:
+    solution_architect:
+      responsibilities:
+        - architecture
+        - contracts
+        - dependency_design
+    agent_orchestrator:
+      responsibilities:
+        - agent_interfaces
+        - workflow_coordination
+    qa_auditor:
+      responsibilities:
+        - gate_design
+        - audit_evidence
+        - traceability_validation
+    developer:
+      responsibilities:
+        - deterministic_code
+        - integrations
+        - tests
+    platform_administrator:
+      responsibilities:
+        - credentials
+        - cloud_runtime
+        - access_control
+
+mvp_definitions:
+  MVP_0_1:
+    name: Deterministic Control Plane MVP
+    status: complete
+    scope:
+      - architecture
+      - contracts
+      - schemas
+      - golden_test
+      - QA_gates
+      - human_approval_mechanism
+      - controlled_publication_gate
+    live_external_actions: false
+  MVP_0_2:
+    name: Runtime Integration MVP
+    status: planned
+    scope:
+      - Google_Forms_live_adapter
+      - Google_Drive_operational_storage
+      - Gmail_approval_delivery
+      - GCP_secret_management
+      - runtime_state_persistence
+    live_external_actions: sandbox_or_controlled
+  MVP_0_3:
+    name: Live E2E Pilot
+    status: planned
+    scope:
+      - real_requisition
+      - real_human_review
+      - real_form_creation
+      - real_approval
+      - controlled_publication_to_authorized_channel
+      - execution_receipt
+    live_external_actions: controlled_production_or_pilot
+  MVP_1_0:
+    name: Production-Ready Recruitment Workflow
+    status: future
+    scope:
+      - multi_job_support
+      - observability
+      - retry_and_idempotency
+      - operational_datastore
+      - role_based_access
+      - compliance_controls
+      - deployment_automation
+      - multi_channel_adapters
+
+quality:
+  mandatory_requirement_coverage: "100%"
+  orphan_technical_questions: 0
+  unsupported_publication_claims: 0
+  publication_without_approval: 0
+  versioned_artifact_coverage: "100%"
+  blocking_gate_policy: fail_closed
+
+phase_model:
+  PHASE-01:
+    name: Architecture and Control Plane
+    status: complete
+  PHASE-02:
+    name: Runtime Integrations and Live E2E Pilot
+    status: ready_for_execution
+  PHASE-03:
+    name: Production Hardening and Scale
+    status: future
