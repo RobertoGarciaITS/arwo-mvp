@@ -1,36 +1,34 @@
 project_state:
   project_id: ARWO
   version: "0.1"
-  current_phase: mvp_architecture_complete
-  current_chunk: CHUNK-08
+  current_phase: phase_02_runtime_integrations
+  current_chunk: P2-CHUNK-01
   source_of_truth_target: github
 
-progress:
-  architecture: 100
-  contracts: 100
-  repository_bootstrap: 100
-  job_normalizer: 100
-  questionnaire_generator: 100
-  forms_integration: 100
-  publication: 100
-  qa_orchestrator: 100
-  approval_workflow: 100
-  controlled_publication: 100
+phase_01:
+  status: COMPLETE
+  deterministic_golden_path: PASS
+
+phase_02_progress:
+  runtime_configuration_and_secrets: 100
+  drive_operational_storage: 0
+  forms_live_adapter: 0
+  approval_delivery: 0
+  runtime_state_persistence: 0
+  sandbox_e2e: 0
+  external_publication_adapter: 0
 
 last_gate:
-  id: CONTROLLED-PUBLICATION-GATE
+  id: P2-GATE-01-RUNTIME-SECURITY
   result: PASS
 
-mvp_status:
-  architecture_and_control_plane: COMPLETE
-  deterministic_golden_path: PASS
-  production_external_integrations: NOT_EXECUTED
-  production_human_approval_completed: false
-  note: >
-    The MVP control architecture is complete. Real external publishing remains
-    intentionally unexecuted because GTC-001 uses synthetic approval evidence.
+runtime_status:
+  real_gcp_resources_created: false
+  real_secrets_created: false
+  real_oauth_credentials_configured: false
+  note: Static security and configuration baseline is complete.
 
-next_phase:
-  id: PHASE-02
-  name: Runtime Integrations and Live E2E Pilot
-  status: READY_FOR_PLANNING
+next_chunk:
+  id: P2-CHUNK-02
+  name: Google Drive Operational Storage
+  status: READY
