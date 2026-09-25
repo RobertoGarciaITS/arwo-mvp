@@ -1,0 +1,36 @@
+publication_id: PUB-GQA-001
+job_id: JOB-GQA-001
+version: "0.1"
+status: draft
+source_job_contract_version: "0.1"
+
+channels:
+  - channel: linkedin_social
+    enabled: true
+    content:
+      title: Gaming QA Engineer
+      headline: Gaming QA Engineer — professional multiplayer game QA experience required
+      summary: >
+        We are seeking a Gaming QA Engineer with professional QA/testing,
+        Game QA, and hands-on multiplayer game testing experience.
+      responsibilities: []
+      mandatory_requirements:
+        - Professional QA/testing experience
+        - Professional Game QA experience
+        - Professional hands-on Multiplayer Game QA experience
+      desirable_requirements: []
+      application_url: null
+      call_to_action: Apply through the approved application link.
+
+consistency:
+  mandatory_requirements_total: 3
+  mandatory_requirements_present: 3
+  missing_mandatory_requirements: 0
+  unsupported_claims: 0
+  application_url_match: true
+
+warnings:
+  - code: PG-W001
+    text: Application URL is not yet available; publication remains draft.
+  - code: PG-W002
+    text: Source fixture is reconstructed from the observed recruitment form and may omit original vacancy context.

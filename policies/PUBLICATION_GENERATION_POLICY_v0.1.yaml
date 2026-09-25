@@ -1,0 +1,58 @@
+policy:
+  id: ARWO-PUBLICATION-GENERATION
+  version: "0.1"
+
+allowed_channels:
+  - linkedin_social
+  - company_site
+  - email
+  - whatsapp
+  - other
+
+global_rules:
+  mandatory_requirements_must_be_preserved: true
+  unsupported_claims_allowed: false
+  application_url_must_be_preserved: true
+  external_publication_requires_approval: true
+  default_status: draft
+
+channel_profiles:
+  linkedin_social:
+    include:
+      - title
+      - headline
+      - summary
+      - responsibilities
+      - mandatory_requirements
+      - desirable_requirements
+      - application_url
+      - call_to_action
+    headline_max_chars: 140
+    summary_max_chars: 1200
+    default_call_to_action: Apply through the approved application link.
+  company_site:
+    include:
+      - title
+      - summary
+      - responsibilities
+      - mandatory_requirements
+      - desirable_requirements
+      - application_url
+      - call_to_action
+  email:
+    include:
+      - title
+      - summary
+      - mandatory_requirements
+      - application_url
+      - call_to_action
+
+prohibited_transformations:
+  - mandatory_to_desirable
+  - desirable_to_mandatory
+  - invented_salary
+  - invented_location
+  - invented_employment_type
+  - invented_experience_years
+  - invented_benefits
+  - invented_company_claims

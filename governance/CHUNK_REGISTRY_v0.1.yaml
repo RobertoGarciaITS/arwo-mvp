@@ -27,10 +27,12 @@ chunks:
       gate_result: PASS
     - id: CHUNK-05
       name: Publication Generator
-      status: ready
+      status: completed
+      gate: PUBLICATION-GENERATOR-GATE
+      gate_result: PASS
     - id: CHUNK-06
       name: QA Orchestrator
-      status: planned
+      status: ready
     - id: CHUNK-07
       name: Human Approval
       status: planned

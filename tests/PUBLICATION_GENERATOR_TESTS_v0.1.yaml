@@ -1,0 +1,46 @@
+test_suite:
+  id: ARWO-PG-TESTS-001
+  component: Publication Generator
+  version: "0.1"
+
+tests:
+  - id: PG-T001
+    name: publication_schema_valid
+    blocking: true
+  - id: PG-T002
+    name: canonical_title_preserved
+    blocking: true
+  - id: PG-T003
+    name: all_mandatory_requirements_preserved
+    blocking: true
+  - id: PG-T004
+    name: no_extra_mandatory_requirements
+    blocking: true
+  - id: PG-T005
+    name: no_unsupported_location_claim
+    blocking: true
+  - id: PG-T006
+    name: no_unsupported_compensation_claim
+    blocking: true
+  - id: PG-T007
+    name: no_unsupported_employment_type_claim
+    blocking: true
+  - id: PG-T008
+    name: no_invented_experience_years
+    blocking: true
+  - id: PG-T009
+    name: application_url_preserved
+    blocking: true
+  - id: PG-T010
+    name: default_status_is_draft
+    blocking: true
+  - id: PG-T011
+    name: unsupported_claims_zero
+    blocking: true
+  - id: PG-T012
+    name: channel_profile_length_limits
+    blocking: true
+
+gate:
+  id: PUBLICATION-GENERATOR-GATE
+  pass_condition: all_blocking_tests_pass
