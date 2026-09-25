@@ -1,0 +1,38 @@
+policy:
+  id: ARWO-ENVIRONMENT-POLICY
+  version: "0.1"
+
+environments:
+  local_dev:
+    external_writes: disabled_by_default
+    synthetic_data_only: true
+    real_candidate_data: false
+    publication: prohibited
+  sandbox:
+    external_writes: controlled
+    synthetic_data_only: preferred
+    real_candidate_data: false
+    publication: prohibited
+  production:
+    external_writes: controlled
+    synthetic_data_only: false
+    real_candidate_data: allowed_in_operational_plane_only
+    publication: allowed_only_with_real_human_approval
+
+promotion_rules:
+  local_dev_to_sandbox:
+    requires:
+      - P2-GATE-01_runtime_security_pass
+  sandbox_to_production:
+    requires:
+      - P2-GATE-01_runtime_security_pass
+      - P2-GATE-02_drive_storage_pass
+      - P2-GATE-03_forms_creation_pass
+      - P2-GATE-04_approval_evidence_pass
+      - P2-GATE-05_e2e_sandbox_pass
+      - P2-GATE-06_live_pilot_authorization_pass
+
+forbidden:
+  - production_credentials_in_local_env_files
+  - candidate_pii_in_github
+  - synthetic_approval_as_production_authorization

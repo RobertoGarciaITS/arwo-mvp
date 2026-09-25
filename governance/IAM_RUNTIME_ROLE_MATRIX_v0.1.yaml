@@ -1,0 +1,39 @@
+matrix:
+  id: ARWO-IAM-RUNTIME-ROLE-MATRIX
+  version: "0.1"
+
+principle: least_privilege
+
+runtime_identities:
+  - id: ARWO-RUNTIME-SERVICE
+    type: service_identity
+    intended_permissions:
+      - read_runtime_secret_versions
+      - write_application_logs
+      - invoke_configured_runtime_dependencies
+    prohibited:
+      - repository_admin
+      - organization_admin
+      - unrestricted_project_owner
+
+  - id: ARWO-DEPLOYER
+    type: human_or_ci_identity
+    intended_permissions:
+      - deploy_runtime
+      - configure_runtime_environment
+      - bind_runtime_secret_references
+    prohibited:
+      - read_candidate_documents_unless_operationally_required
+
+  - id: ARWO-OPERATIONAL-REVIEWER
+    type: human_identity
+    intended_permissions:
+      - review_approval_package
+      - access_operational_artifacts_as_authorized
+    prohibited:
+      - change_source_code_via_runtime_credentials
+
+controls:
+  no_owner_role_for_runtime_service: true
+  separate_deployer_and_runtime_identity: true
+  production_access_review_required: true
