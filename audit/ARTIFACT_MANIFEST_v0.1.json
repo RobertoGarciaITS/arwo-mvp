@@ -1,0 +1,7 @@
+{
+  "project": "AI Recruitment Workflow Orchestrator",
+  "version": "0.1",
+  "source_of_truth": "github",
+  "repository": "RobertoGarciaITS/arwo-mvp",
+  "baseline_status": "bootstrap_in_progress"
+}
