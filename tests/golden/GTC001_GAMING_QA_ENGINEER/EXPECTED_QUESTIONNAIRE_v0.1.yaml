@@ -93,7 +93,7 @@ sections:
         intent: eligibility
         type: single_choice
         required: true
-        options: [Yes, No]
+        options: ["Yes", "No"]
         source_origin: job_requirement
         source_requirement_ids: [REQ-003]
         source_tool_names: []
