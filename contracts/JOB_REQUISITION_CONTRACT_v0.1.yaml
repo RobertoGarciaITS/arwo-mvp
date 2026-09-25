@@ -1,0 +1,60 @@
+contract:
+  name: job_requisition
+  version: "0.1"
+
+required_fields:
+  - job_id
+  - source
+  - job.title.canonical
+  - job.summary
+  - requirements
+
+job_requisition:
+  job_id: string
+  source:
+    source_type: enum[plain_text,email,docx,pdf,google_doc,other]
+    source_reference: string
+    received_at: datetime
+    source_owner: string|null
+  job:
+    title:
+      raw: string
+      canonical: string
+    department: string|null
+    employment_type: string|null
+    location:
+      mode: enum[onsite,hybrid,remote,unspecified]
+      city: string|null
+      region: string|null
+      country: string|null
+    summary: string
+    responsibilities:
+      - id: string
+        text: string
+    requirements:
+      mandatory:
+        - id: string
+          text: string
+          category: string
+          screening_required: boolean
+          knockout: boolean
+      desirable:
+        - id: string
+          text: string
+          category: string
+    tools:
+      - name: string
+        category: string
+        required: boolean
+    experience:
+      professional_years_min: number|null
+      domain_years_min: number|null
+    compensation:
+      currency: string|null
+      min: number|null
+      max: number|null
+      disclose_in_posting: boolean
+  provenance:
+    extraction_model: string|null
+    extraction_timestamp: datetime|null
+    source_hash: string|null
