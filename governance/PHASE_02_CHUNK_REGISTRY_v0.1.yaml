@@ -1,0 +1,33 @@
+phase_02_chunks:
+  project_id: ARWO
+  version: "0.1"
+  phase: PHASE-02
+
+  sequence:
+    - id: P2-CHUNK-01
+      name: Runtime Configuration and Secrets Baseline
+      status: in_progress
+      gate: P2-GATE-01-RUNTIME-SECURITY
+    - id: P2-CHUNK-02
+      name: Google Drive Operational Storage
+      status: blocked_by_P2_CHUNK_01
+      gate: P2-GATE-02-DRIVE-STORAGE
+    - id: P2-CHUNK-03
+      name: Google Forms Live Adapter
+      status: planned
+      gate: P2-GATE-03-FORMS-CREATION
+    - id: P2-CHUNK-04
+      name: Approval Delivery and Evidence Capture
+      status: planned
+      gate: P2-GATE-04-APPROVAL-EVIDENCE
+    - id: P2-CHUNK-05
+      name: Runtime Workflow State Persistence
+      status: planned
+    - id: P2-CHUNK-06
+      name: Sandbox E2E Pilot
+      status: planned
+      gate: P2-GATE-05-E2E-SANDBOX
+    - id: P2-CHUNK-07
+      name: Controlled External Publication Adapter
+      status: planned
+      gate: P2-GATE-06-LIVE-PILOT-AUTHORIZATION
