@@ -1,0 +1,24 @@
+contract:
+  name: publication
+  version: "0.1"
+
+publication:
+  publication_id: string
+  job_id: string
+  source_job_contract_version: string
+  channels:
+    - channel: enum[linkedin_social,company_site,email,whatsapp,other]
+      enabled: boolean
+      content:
+        title: string
+        headline: string|null
+        summary: string
+        responsibilities: [string]
+        mandatory_requirements: [string]
+        desirable_requirements: [string]
+        application_url: string|null
+        call_to_action: string
+  controls:
+    no_new_requirements: true
+    no_removed_mandatory_requirements: true
+    approval_required: true
