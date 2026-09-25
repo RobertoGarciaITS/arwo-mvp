@@ -1,0 +1,42 @@
+preflight:
+  chunk_id: CHUNK-03
+  name: Questionnaire Generator
+  version: "0.1"
+
+dependencies:
+  - contracts/JOB_REQUISITION_CONTRACT_v0.1.yaml
+  - contracts/QUESTIONNAIRE_CONTRACT_v0.1.yaml
+  - policies/QUESTION_GENERATION_POLICY_v0.1.yaml
+  - tests/golden/GTC001_GAMING_QA_ENGINEER/EXPECTED_JOB_NORMALIZED_v0.1.yaml
+  - audit/CHUNK_02_AUDIT_REPORT_v0.1.yaml
+
+checks:
+  - id: PF-03-001
+    description: Job Normalizer gate passed
+    result: pass
+  - id: PF-03-002
+    description: questionnaire contract exists
+    result: pass
+  - id: PF-03-003
+    description: question generation policy exists
+    result: pass
+  - id: PF-03-004
+    description: mapping rules defined
+    result: pass
+  - id: PF-03-005
+    description: output schema defined
+    result: pass
+  - id: PF-03-006
+    description: agent contract defined
+    result: pass
+  - id: PF-03-007
+    description: skill defined
+    result: pass
+  - id: PF-03-008
+    description: prompt defined
+    result: pass
+
+gate:
+  result: PASS
+  blockers: 0
+  next_action: create golden questionnaire and deterministic coverage tests
