@@ -1,0 +1,5 @@
+requirement_id,requirement,question_ids,publication_section,qa_check
+REQ-001,Professional QA/Testing experience,Q-004,mandatory_requirements,QA-COV-001
+REQ-002,Professional Game QA experience,Q-005,mandatory_requirements,QA-COV-002
+REQ-003,Professional Multiplayer Game Testing experience,Q-006|Q-007,mandatory_requirements,QA-COV-003
+REQ-004,Experience testing multiplayer systems and features,Q-008,desirable_requirements,QA-COV-004
