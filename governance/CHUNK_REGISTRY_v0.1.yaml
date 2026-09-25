@@ -32,10 +32,12 @@ chunks:
       gate_result: PASS
     - id: CHUNK-06
       name: QA Orchestrator
-      status: ready
+      status: completed
+      gate: QA-ORCHESTRATOR-GATE
+      gate_result: PASS
     - id: CHUNK-07
       name: Human Approval
-      status: planned
+      status: ready
     - id: CHUNK-08
       name: Controlled Publication
       status: planned
