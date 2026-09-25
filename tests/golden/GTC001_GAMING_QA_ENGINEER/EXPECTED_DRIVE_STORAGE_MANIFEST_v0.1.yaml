@@ -1,0 +1,61 @@
+job_id: JOB-GQA-001
+environment: sandbox
+root_folder_id: sandbox-root-placeholder
+job_folder_name: JOB-JOB-GQA-001
+
+folders:
+  source:
+    folder_id: fld-source-placeholder
+    classification: operational_source
+    restricted: false
+  normalized:
+    folder_id: fld-normalized-placeholder
+    classification: derived_operational_artifact
+    restricted: false
+  forms:
+    folder_id: fld-forms-placeholder
+    classification: integration_artifact
+    restricted: false
+  publications:
+    folder_id: fld-publications-placeholder
+    classification: publication_artifact
+    restricted: false
+  approvals:
+    folder_id: fld-approvals-placeholder
+    classification: approval_evidence
+    restricted: true
+  candidates:
+    folder_id: fld-candidates-placeholder
+    classification: candidate_pii
+    restricted: true
+  responses:
+    folder_id: fld-responses-placeholder
+    classification: candidate_pii
+    restricted: true
+  audit:
+    folder_id: fld-audit-placeholder
+    classification: operational_audit
+    restricted: false
+
+artifacts:
+  - artifact_id: DRV-ART-001
+    artifact_type: normalized_job_contract
+    version: "0.1"
+    folder: normalized
+    filename: JOB-GQA-001__normalized_job_contract__v0.1.yaml
+    sha256: 1111111111111111111111111111111111111111111111111111111111111111
+    contains_candidate_pii: false
+  - artifact_id: DRV-ART-002
+    artifact_type: questionnaire_contract
+    version: "0.1"
+    folder: forms
+    filename: JOB-GQA-001__questionnaire_contract__v0.1.yaml
+    sha256: 2222222222222222222222222222222222222222222222222222222222222222
+    contains_candidate_pii: false
+  - artifact_id: DRV-ART-003
+    artifact_type: approval_manifest
+    version: "0.1"
+    folder: approvals
+    filename: JOB-GQA-001__approval_manifest__v0.1.yaml
+    sha256: 3333333333333333333333333333333333333333333333333333333333333333
+    contains_candidate_pii: false
