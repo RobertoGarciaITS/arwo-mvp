@@ -1,0 +1,57 @@
+audit:
+  id: ARWO-AUD-CHUNK-02-001
+  chunk_id: CHUNK-02
+  name: Job Normalizer
+  version: "0.1"
+  repository: RobertoGarciaITS/arwo-mvp
+  branch: feature/arwo-chunk-02-job-normalizer
+  pr: 2
+
+artifacts_reviewed:
+  - agents/job_normalizer/AGENT_CONTRACT_v0.1.yaml
+  - skills/job_normalization/SKILL.md
+  - prompts/JOB_NORMALIZER_PROMPT_v0.1.md
+  - schemas/JOB_NORMALIZER_OUTPUT_SCHEMA_v0.1.json
+  - tests/JOB_NORMALIZER_TESTS_v0.1.yaml
+  - tests/golden/GTC001_GAMING_QA_ENGINEER/INPUT_JOB_RAW_v0.1.txt
+  - tests/golden/GTC001_GAMING_QA_ENGINEER/EXPECTED_JOB_NORMALIZED_v0.1.yaml
+  - scripts/validate_job_normalizer.py
+  - .github/workflows/job-normalizer-tests.yml
+
+ci_evidence:
+  workflow_name: Job Normalizer Tests
+  run_id: 36104836517
+  job_id: 107974960129
+  head_sha: 60cf77ba850009cb55e198d06cfd5fa474cd0988
+  gate: JOB-NORMALIZER-GATE
+  gate_result: PASS
+  blocking_tests: 0
+
+test_results:
+  JN-T001_title_extraction: PASS
+  JN-T002_multiplayer_requirement_preserved: PASS
+  JN-T003_mandatory_requirement_not_downgraded: PASS
+  JN-T004_no_numeric_experience_invention: PASS
+  JN-T005_no_location_invention: PASS
+  JN-T006_tools_extracted: PASS
+  JN-T007_unsupported_requirements_zero: PASS
+  JN-T008_stable_ids: PASS
+  JN-T009_schema_valid: PASS
+  JN-T010_source_limitation_warning: PASS
+
+observations:
+  - id: OBS-02-001
+    severity: info
+    text: GTC-001 raw input is a controlled reconstruction from the observed recruitment form, not the complete original vacancy text.
+  - id: OBS-02-002
+    severity: info
+    text: The current gate validates the canonical expected output and anti-invention rules; live LLM invocation is intentionally deferred until provider integration is introduced.
+  - id: OBS-02-003
+    severity: low
+    text: GitHub Actions emitted a Node.js 20 deprecation warning for third-party actions; it did not affect test execution.
+
+gate:
+  id: JOB-NORMALIZER-GATE
+  result: PASS
+  blockers: 0
+  next_chunk: CHUNK-03
