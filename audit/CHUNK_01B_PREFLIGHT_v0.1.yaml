@@ -1,0 +1,29 @@
+preflight:
+  chunk_id: CHUNK-01B
+  name: Repository Bootstrap & Governance
+  version: "0.1"
+
+checks:
+  - id: PF-001
+    description: baseline artifacts exist
+    result: pass
+  - id: PF-002
+    description: YAML baseline syntax validated
+    result: pass
+  - id: PF-003
+    description: data boundary policy defined
+    result: pass
+  - id: PF-004
+    description: branch policy defined
+    result: pass
+  - id: PF-005
+    description: artifact registry defined
+    result: pass
+  - id: PF-006
+    description: target GitHub repository identified
+    result: pass
+    evidence: RobertoGarciaITS/arwo-mvp
+
+gate:
+  result: PENDING_REMOTE_AUDIT
+  blockers: []
