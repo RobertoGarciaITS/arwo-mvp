@@ -1,0 +1,37 @@
+preflight:
+  chunk_id: CHUNK-04
+  name: Form Builder
+  version: "0.1"
+
+dependencies:
+  - tests/golden/GTC001_GAMING_QA_ENGINEER/EXPECTED_QUESTIONNAIRE_v0.1.yaml
+  - schemas/QUESTIONNAIRE_OUTPUT_SCHEMA_v0.1.json
+  - audit/CHUNK_03_AUDIT_REPORT_v0.1.yaml
+
+checks:
+  - id: PF-04-001
+    description: Questionnaire Generator gate passed
+    result: pass
+  - id: PF-04-002
+    description: Google Forms official API behavior reviewed
+    result: pass
+  - id: PF-04-003
+    description: compatibility policy defined
+    result: pass
+  - id: PF-04-004
+    description: form builder contract defined
+    result: pass
+  - id: PF-04-005
+    description: file-upload template strategy explicitly defined
+    result: pass
+  - id: PF-04-006
+    description: output schema defined
+    result: pass
+  - id: PF-04-007
+    description: no external credentials required for static gate
+    result: pass
+
+gate:
+  result: PASS
+  blockers: 0
+  next_action: implement deterministic build-spec generator and golden tests
