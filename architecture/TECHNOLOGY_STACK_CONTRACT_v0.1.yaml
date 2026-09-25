@@ -1,0 +1,46 @@
+contract:
+  id: ARWO-TECHNOLOGY-STACK-CONTRACT
+  version: "0.1"
+
+principles:
+  - use_managed_services_when_possible
+  - separate_control_plane_from_operational_data
+  - keep_external_credentials_out_of_git
+  - prefer_deterministic_code_for_enforcement
+  - use_llm_only_for_semantic_tasks
+
+stack:
+  repository:
+    product: GitHub
+    mandatory: true
+  runtime_language:
+    product: Python
+    target_version: "3.12"
+    mandatory: true
+  ci:
+    product: GitHub Actions
+    mandatory: true
+  cloud:
+    product: Google Cloud Platform
+    mandatory_for_phase_02: true
+  secrets:
+    product: Google Secret Manager
+    mandatory_for_phase_02: true
+  forms:
+    product: Google Forms
+    mandatory_for_phase_02: true
+  operational_files:
+    product: Google Drive
+    mandatory_for_phase_02: true
+  notifications:
+    product: Gmail
+    mandatory_for_phase_02: false
+  publication:
+    product: LinkedIn_or_other_authorized_channel
+    mandatory_for_phase_02: false
+
+deferred:
+  - full_ATS
+  - background_check_vendor
+  - payroll
+  - onboarding_platform
