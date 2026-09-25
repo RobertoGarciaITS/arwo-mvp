@@ -1,0 +1,80 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "urn:arwo:approval-output:v0.1",
+  "title": "ARWO Human Approval Output",
+  "type": "object",
+  "required": [
+    "approval_id", "job_id", "version", "status", "requested_at",
+    "manifest", "reviewer", "decision", "publication_authorization",
+    "gate_07"
+  ],
+  "properties": {
+    "approval_id": {"type": "string"},
+    "job_id": {"type": "string"},
+    "version": {"type": "string"},
+    "status": {"enum": ["pending", "changes_requested", "approved", "rejected"]},
+    "requested_at": {"type": "string"},
+    "manifest": {
+      "type": "object",
+      "required": ["hash_algorithm", "artifacts", "manifest_digest"],
+      "properties": {
+        "hash_algorithm": {"const": "sha256"},
+        "artifacts": {
+          "type": "array",
+          "minItems": 5,
+          "items": {
+            "type": "object",
+            "required": ["artifact_id", "artifact_type", "version", "path", "sha256"],
+            "properties": {
+              "artifact_id": {"type": "string"},
+              "artifact_type": {"type": "string"},
+              "version": {"type": "string"},
+              "path": {"type": "string"},
+              "sha256": {"type": "string", "pattern": "^[a-f0-9]{64}$"}
+            },
+            "additionalProperties": false
+          }
+        },
+        "manifest_digest": {"type": "string", "pattern": "^[a-f0-9]{64}$"}
+      },
+      "additionalProperties": false
+    },
+    "reviewer": {
+      "type": "object",
+      "required": ["role", "identity"],
+      "properties": {
+        "role": {"type": "string"},
+        "identity": {"type": ["string", "null"]}
+      },
+      "additionalProperties": false
+    },
+    "decision": {
+      "type": "object",
+      "required": ["decided_at", "comments"],
+      "properties": {
+        "decided_at": {"type": ["string", "null"]},
+        "comments": {"type": ["string", "null"]}
+      },
+      "additionalProperties": false
+    },
+    "publication_authorization": {
+      "type": "object",
+      "required": ["allowed", "channels"],
+      "properties": {
+        "allowed": {"type": "boolean"},
+        "channels": {"type": "array", "items": {"type": "string"}}
+      },
+      "additionalProperties": false
+    },
+    "gate_07": {
+      "type": "object",
+      "required": ["result", "reason"],
+      "properties": {
+        "result": {"enum": ["PASS", "FAIL", "PENDING"]},
+        "reason": {"type": "string"}
+      },
+      "additionalProperties": false
+    }
+  },
+  "additionalProperties": false
+}
