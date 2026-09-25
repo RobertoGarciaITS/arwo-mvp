@@ -1,0 +1,42 @@
+matrix:
+  id: ARWO-RACI-v0.1
+  version: "0.1"
+
+activities:
+  - activity: Define business requisition
+    hiring_manager: A
+    recruiter: R
+    solution_architect: I
+    qa_auditor: I
+  - activity: Normalize requisition
+    recruiter: C
+    agent_orchestrator: A
+    developer: R
+    qa_auditor: C
+  - activity: Generate questionnaire
+    recruiter: C
+    agent_orchestrator: A
+    developer: R
+    qa_auditor: C
+  - activity: Run QA gates
+    qa_auditor: A
+    developer: R
+    recruiter: I
+  - activity: Human approval
+    hr_reviewer: A
+    recruiter: R
+    qa_auditor: C
+  - activity: Configure credentials
+    platform_administrator: A
+    developer: R
+  - activity: Controlled publication
+    hr_reviewer: A
+    platform_administrator: C
+    developer: R
+    qa_auditor: C
+
+legend:
+  R: Responsible
+  A: Accountable
+  C: Consulted
+  I: Informed
