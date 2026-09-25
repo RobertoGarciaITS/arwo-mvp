@@ -1,4 +1,5 @@
 name: Publication Generator Tests
+# CHUNK-05 gate
 
 on:
   pull_request:
