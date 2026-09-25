@@ -1,0 +1,24 @@
+branch_policy:
+  version: "0.1"
+  permanent_branches:
+    - main
+  temporary_patterns:
+    - feature/*
+    - architecture/*
+    - integration/*
+    - qa/*
+    - fix/*
+    - docs/*
+  exceptional_patterns:
+    - release/*
+    - hotfix/*
+
+rules:
+  direct_commit_to_main: prohibited
+  pull_request_required: true
+  squash_merge_preferred: true
+  delete_branch_after_merge: true
+  qa_gate_before_merge: required
+
+naming:
+  chunk_branch_pattern: "architecture/arwo-chunk-<NN>-<slug>"
