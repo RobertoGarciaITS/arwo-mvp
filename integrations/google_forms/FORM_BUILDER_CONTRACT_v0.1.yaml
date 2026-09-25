@@ -1,0 +1,74 @@
+component:
+  id: ARWO-FORM-BUILDER
+  name: Google Forms Form Builder
+  version: "0.1"
+  chunk: CHUNK-04
+  type: deterministic_adapter
+
+objective: >
+  Transform a validated ARWO Questionnaire Contract into a deterministic
+  Google Forms build specification and API request plan without changing
+  question semantics or traceability.
+
+inputs:
+  required:
+    - questionnaire_contract
+    - google_forms_compatibility_policy
+  optional:
+    - template_form_id
+    - form_title_override
+    - form_description
+
+outputs:
+  - form_build_spec
+  - google_forms_create_request
+  - google_forms_batch_update_requests
+  - deferred_items
+  - compatibility_warnings
+  - build_manifest
+
+principles:
+  - deterministic_mapping
+  - preserve_question_order
+  - preserve_required_flags
+  - preserve_choice_options
+  - preserve_traceability_metadata_outside_google_form_payload
+  - no_candidate_pii_in_repository
+  - no_api_credentials_in_repository
+
+google_forms_strategy:
+  initial_form_creation:
+    method: forms.create
+    fields:
+      - info.title
+  content_creation:
+    method: forms.batchUpdate
+    atomic_batch_expected: true
+  resume_upload:
+    strategy: template_required
+    reason: forms_api_cannot_create_file_upload_question
+
+non_responsibilities:
+  - candidate_response_processing
+  - candidate scoring
+  - hiring decisions
+  - publication
+  - OAuth token management
+  - creation of unsupported file-upload questions through Forms API
+
+failure_modes:
+  - code: FB-001
+    condition: questionnaire_schema_invalid
+    action: fail
+  - code: FB-002
+    condition: unsupported_question_type_without_strategy
+    action: fail
+  - code: FB-003
+    condition: file_upload_without_template_strategy
+    action: fail
+  - code: FB-004
+    condition: generated_request_order_invalid
+    action: fail
+  - code: FB-005
+    condition: question_order_or_options_changed
+    action: fail

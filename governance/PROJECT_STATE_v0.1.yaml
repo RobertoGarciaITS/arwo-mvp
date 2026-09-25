@@ -1,8 +1,8 @@
 project_state:
   project_id: ARWO
   version: "0.1"
-  current_phase: core_generation
-  current_chunk: CHUNK-03
+  current_phase: integration_generation
+  current_chunk: CHUNK-04
   source_of_truth_target: github
 
 progress:
@@ -11,15 +11,15 @@ progress:
   repository_bootstrap: 100
   job_normalizer: 100
   questionnaire_generator: 100
-  forms_integration: 0
+  forms_integration: 100
   approval_workflow: 0
   publication: 0
 
 last_gate:
-  id: QUESTIONNAIRE-GENERATOR-GATE
+  id: FORM-BUILDER-GATE
   result: PASS
 
 next_chunk:
-  id: CHUNK-04
-  name: Form Builder
+  id: CHUNK-05
+  name: Publication Generator
   status: READY

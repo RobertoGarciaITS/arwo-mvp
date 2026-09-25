@@ -1,0 +1,30 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "urn:arwo:form-build-spec:v0.1",
+  "title": "ARWO Google Forms Build Specification",
+  "type": "object",
+  "required": [
+    "build_id", "questionnaire_id", "provider", "mode",
+    "create_request", "batch_update", "deferred_items",
+    "traceability", "warnings"
+  ],
+  "properties": {
+    "build_id": {"type": "string"},
+    "questionnaire_id": {"type": "string"},
+    "provider": {"const": "google_forms"},
+    "mode": {"enum": ["create_new", "template_clone"]},
+    "template_form_id": {"type": ["string", "null"]},
+    "create_request": {"type": "object"},
+    "batch_update": {
+      "type": "object",
+      "required": ["requests"],
+      "properties": {
+        "requests": {"type": "array"}
+      }
+    },
+    "deferred_items": {"type": "array"},
+    "traceability": {"type": "array"},
+    "warnings": {"type": "array"}
+  },
+  "additionalProperties": false
+}

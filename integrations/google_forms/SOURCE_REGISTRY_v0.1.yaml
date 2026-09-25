@@ -1,0 +1,19 @@
+sources:
+  - id: GF-SRC-001
+    authority: Google for Developers
+    title: Create a form or quiz
+    url: https://developers.google.com/workspace/forms/api/guides/create-form-quiz
+    use: forms.create initializes a form; content is added through batchUpdate
+  - id: GF-SRC-002
+    authority: Google for Developers
+    title: Update a form or quiz
+    url: https://developers.google.com/workspace/forms/api/guides/update-form-quiz
+    use: batchUpdate createItem semantics, atomic grouped changes, sequential request order
+  - id: GF-SRC-003
+    authority: Google for Developers
+    title: REST Resource forms
+    url: https://developers.google.com/workspace/forms/api/reference/rest/v1/forms
+    use: supported question resource kinds and file upload creation limitation
+
+verified_for_chunk: CHUNK-04
+verification_date: "2026-09-25"

@@ -22,10 +22,12 @@ chunks:
       gate_result: PASS
     - id: CHUNK-04
       name: Form Builder
-      status: ready
+      status: completed
+      gate: FORM-BUILDER-GATE
+      gate_result: PASS
     - id: CHUNK-05
       name: Publication Generator
-      status: planned
+      status: ready
     - id: CHUNK-06
       name: QA Orchestrator
       status: planned

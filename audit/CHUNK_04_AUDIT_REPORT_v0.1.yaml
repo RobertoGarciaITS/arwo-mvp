@@ -1,0 +1,73 @@
+audit:
+  id: ARWO-AUD-CHUNK-04-001
+  chunk_id: CHUNK-04
+  name: Google Forms Form Builder
+  version: "0.1"
+  repository: RobertoGarciaITS/arwo-mvp
+  branch: feature/arwo-chunk-04-form-builder
+  pr: 4
+
+artifacts_reviewed:
+  - integrations/google_forms/FORM_BUILDER_CONTRACT_v0.1.yaml
+  - integrations/google_forms/FORM_TEMPLATE_CONTRACT_v0.1.yaml
+  - integrations/google_forms/SOURCE_REGISTRY_v0.1.yaml
+  - skills/form_builder/SKILL.md
+  - policies/GOOGLE_FORMS_COMPATIBILITY_POLICY_v0.1.yaml
+  - schemas/FORM_BUILD_SPEC_SCHEMA_v0.1.json
+  - tests/FORM_BUILDER_TESTS_v0.1.yaml
+  - scripts/build_google_form_spec.py
+  - scripts/validate_form_builder.py
+  - .github/workflows/form-builder-tests.yml
+
+ci_evidence:
+  workflow_name: Form Builder Tests
+  run_id: 36107827617
+  job_id: 107984301673
+  head_sha: b75d35a1a95ef04655e3a932a013cddc13b1449b
+  gate: FORM-BUILDER-GATE
+  gate_result: PASS
+  blocking_tests: 0
+  requests_emitted: 17
+  deferred_template_items: 1
+
+test_results:
+  FB-T001_build_spec_schema_valid: PASS
+  FB-T002_template_mode_selected: PASS
+  FB-T003_single_file_upload_deferred: PASS
+  FB-T004_no_file_upload_create_request: PASS
+  FB-T005_sequential_indices: PASS
+  FB-T006_section_order_preserved: PASS
+  FB-T007_question_order_preserved: PASS
+  FB-T008_required_flags_preserved: PASS
+  FB-T009_choice_options_preserved: PASS
+  FB-T010_choice_types_mapped: PASS
+  FB-T011_full_question_traceability: PASS
+  FB-T012_numeric_validation_limitation_explicit: PASS
+  FB-T013_runtime_template_id_not_committed: PASS
+  FB-T014_deterministic_request_count: PASS
+
+official_api_findings:
+  - forms.create initializes a new form with title
+  - forms.batchUpdate is used to add/update form content
+  - batch subrequests are order-sensitive and validated sequentially
+  - the Forms API currently does not support creating file-upload questions
+
+observations:
+  - id: OBS-04-001
+    severity: info
+    text: GTC-001 selects template_clone mode because resume upload is required.
+  - id: OBS-04-002
+    severity: info
+    text: Template invariant is one required resume-upload question at initial index 0; generated requests are inserted before it.
+  - id: OBS-04-003
+    severity: info
+    text: Runtime template_form_id remains external configuration and is not stored in Git.
+  - id: OBS-04-004
+    severity: low
+    text: Numeric validation is preserved in ARWO metadata but not emitted by the v0.1 Forms adapter.
+
+gate:
+  id: FORM-BUILDER-GATE
+  result: PASS
+  blockers: 0
+  next_chunk: CHUNK-05
