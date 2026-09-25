@@ -1,0 +1,81 @@
+job_id: JOB-GQA-001
+
+source:
+  source_type: reconstructed_test_fixture
+  source_reference: tests/golden/GTC001_GAMING_QA_ENGINEER/INPUT_JOB_RAW_v0.1.txt
+
+job:
+  title:
+    raw: Gaming QA Engineer
+    canonical: Gaming QA Engineer
+  department: null
+  employment_type: null
+  location:
+    mode: unspecified
+    city: null
+    region: null
+    country: null
+  summary: >
+    Gaming QA role requiring professional hands-on multiplayer game QA experience,
+    with professional QA/testing and Game QA experience.
+  responsibilities: []
+  requirements:
+    mandatory:
+      - id: REQ-001
+        text: Professional QA/testing experience
+        category: general_qa
+        screening_required: true
+        knockout: false
+      - id: REQ-002
+        text: Professional Game QA experience
+        category: game_qa
+        screening_required: true
+        knockout: false
+      - id: REQ-003
+        text: Professional hands-on Multiplayer Game QA experience
+        category: multiplayer_qa
+        screening_required: true
+        knockout: true
+    desirable: []
+    unclassified:
+      - id: REQ-004
+        text: Experience testing multiplayer systems including matchmaking, synchronization, real-time gameplay, network and latency, multiplayer modes, and lobbies
+        category: multiplayer_features
+  tools:
+    - name: Postman
+      category: api_testing
+      required: false
+    - name: Swagger
+      category: api_testing
+      required: false
+    - name: Jira
+      category: bug_tracking
+      required: false
+    - name: ClickUp
+      category: test_management
+      required: false
+  experience:
+    professional_years_min: null
+    domain_years_min: null
+  compensation:
+    currency: null
+    min: null
+    max: null
+    disclose_in_posting: false
+
+warnings:
+  - code: JN-W001
+    text: Source fixture is reconstructed from the observed recruitment form and may omit original vacancy context.
+  - code: JN-W002
+    text: Multiplayer feature coverage is relevant but not explicitly labeled mandatory or desirable in the fixture.
+
+missing_fields:
+  - department
+  - employment_type
+  - location
+  - compensation
+  - numeric_experience_minimum
+
+provenance:
+  extraction_mode: golden_expected_output
+  source_grounding: reconstructed_fixture
