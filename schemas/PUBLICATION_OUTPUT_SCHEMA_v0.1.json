@@ -1,0 +1,60 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "urn:arwo:publication-output:v0.1",
+  "title": "ARWO Publication Generator Output",
+  "type": "object",
+  "required": [
+    "publication_id", "job_id", "version", "status",
+    "source_job_contract_version", "channels", "consistency", "warnings"
+  ],
+  "properties": {
+    "publication_id": {"type": "string", "minLength": 1},
+    "job_id": {"type": "string", "minLength": 1},
+    "version": {"type": "string"},
+    "status": {"enum": ["draft", "pending_approval", "approved", "published"]},
+    "source_job_contract_version": {"type": "string"},
+    "channels": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": ["channel", "enabled", "content"],
+        "properties": {
+          "channel": {"type": "string"},
+          "enabled": {"type": "boolean"},
+          "content": {
+            "type": "object",
+            "required": [
+              "title", "headline", "summary", "responsibilities",
+              "mandatory_requirements", "desirable_requirements",
+              "application_url", "call_to_action"
+            ],
+            "properties": {
+              "title": {"type": "string"},
+              "headline": {"type": ["string", "null"]},
+              "summary": {"type": "string"},
+              "responsibilities": {"type": "array", "items": {"type": "string"}},
+              "mandatory_requirements": {"type": "array", "items": {"type": "string"}},
+              "desirable_requirements": {"type": "array", "items": {"type": "string"}},
+              "application_url": {"type": ["string", "null"]},
+              "call_to_action": {"type": "string"}
+            },
+            "additionalProperties": false
+          }
+        },
+        "additionalProperties": false
+      }
+    },
+    "consistency": {
+      "type": "object",
+      "required": [
+        "mandatory_requirements_total",
+        "mandatory_requirements_present",
+        "missing_mandatory_requirements",
+        "unsupported_claims",
+        "application_url_match"
+      ]
+    },
+    "warnings": {"type": "array"}
+  },
+  "additionalProperties": false
+}
