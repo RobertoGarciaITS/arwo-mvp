@@ -1,0 +1,44 @@
+test_suite:
+  id: ARWO-JN-TESTS-001
+  component: Job Normalizer
+  version: "0.1"
+
+tests:
+  - id: JN-T001
+    name: title_extraction
+    expected: Gaming QA Engineer
+  - id: JN-T002
+    name: mandatory_multiplayer_requirement_preserved
+    expected_requirement_id: REQ-003
+  - id: JN-T003
+    name: mandatory_requirement_not_downgraded
+    expected: pass
+  - id: JN-T004
+    name: no_numeric_experience_invention
+    expected: pass
+  - id: JN-T005
+    name: no_location_invention
+    expected_mode: unspecified
+  - id: JN-T006
+    name: tools_extracted
+    expected:
+      - Postman
+      - Swagger
+      - Jira
+      - ClickUp
+  - id: JN-T007
+    name: unsupported_requirements
+    expected_count: 0
+  - id: JN-T008
+    name: stable_ids
+    expected: pass
+  - id: JN-T009
+    name: schema_valid
+    expected: pass
+  - id: JN-T010
+    name: warnings_for_missing_original_requisition_context
+    expected: pass
+
+gate:
+  id: JOB-NORMALIZER-GATE
+  pass_condition: all_blocking_tests_pass
