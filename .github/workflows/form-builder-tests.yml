@@ -1,0 +1,47 @@
+name: Form Builder Tests
+
+on:
+  pull_request:
+    paths:
+      - "integrations/google_forms/**"
+      - "skills/form_builder/**"
+      - "policies/GOOGLE_FORMS_COMPATIBILITY_POLICY_v0.1.yaml"
+      - "schemas/FORM_BUILD_SPEC_SCHEMA_v0.1.json"
+      - "tests/FORM_BUILDER_TESTS_v0.1.yaml"
+      - "tests/golden/GTC001_GAMING_QA_ENGINEER/EXPECTED_QUESTIONNAIRE_v0.1.yaml"
+      - "scripts/build_google_form_spec.py"
+      - "scripts/validate_form_builder.py"
+      - ".github/workflows/form-builder-tests.yml"
+      - "requirements-dev.txt"
+  push:
+    branches:
+      - main
+    paths:
+      - "integrations/google_forms/**"
+      - "skills/form_builder/**"
+      - "policies/GOOGLE_FORMS_COMPATIBILITY_POLICY_v0.1.yaml"
+      - "schemas/FORM_BUILD_SPEC_SCHEMA_v0.1.json"
+      - "tests/FORM_BUILDER_TESTS_v0.1.yaml"
+      - "scripts/build_google_form_spec.py"
+      - "scripts/validate_form_builder.py"
+
+jobs:
+  validate-form-builder:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+
+      - name: Install validation dependencies
+        run: python -m pip install -r requirements-dev.txt
+
+      - name: Generate build spec
+        run: python scripts/build_google_form_spec.py
+
+      - name: Run deterministic Form Builder gate
+        run: python scripts/validate_form_builder.py
