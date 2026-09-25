@@ -1,0 +1,35 @@
+preflight:
+  chunk_id: CHUNK-08
+  name: Controlled Publication
+  version: "0.1"
+
+dependencies:
+  - audit/CHUNK_07_AUDIT_REPORT_v0.1.yaml
+  - schemas/APPROVAL_OUTPUT_SCHEMA_v0.1.json
+  - scripts/build_approval_manifest.py
+  - tests/golden/GTC001_GAMING_QA_ENGINEER/EXPECTED_PUBLICATION_v0.1.yaml
+
+checks:
+  - id: PF-08-001
+    description: Human Approval mechanism gate passed
+    result: pass
+  - id: PF-08-002
+    description: production human approval is not falsely asserted
+    result: pass
+  - id: PF-08-003
+    description: exact-manifest release control defined
+    result: pass
+  - id: PF-08-004
+    description: channel authorization control defined
+    result: pass
+  - id: PF-08-005
+    description: idempotency policy defined
+    result: pass
+  - id: PF-08-006
+    description: external execution excluded from static CI
+    result: pass
+
+gate:
+  result: PASS
+  blockers: 0
+  next_action: implement deterministic release gate and execution-plan tests
