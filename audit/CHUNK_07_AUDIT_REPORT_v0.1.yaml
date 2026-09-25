@@ -1,0 +1,68 @@
+audit:
+  id: ARWO-AUD-CHUNK-07-001
+  chunk_id: CHUNK-07
+  name: Human Approval
+  version: "0.1"
+  repository: RobertoGarciaITS/arwo-mvp
+  branch: feature/arwo-chunk-07-human-approval
+  pr: 7
+
+artifacts_reviewed:
+  - agents/human_approval/APPROVAL_ORCHESTRATOR_CONTRACT_v0.1.yaml
+  - skills/human_approval/SKILL.md
+  - schemas/APPROVAL_OUTPUT_SCHEMA_v0.1.json
+  - tests/HUMAN_APPROVAL_TESTS_v0.1.yaml
+  - scripts/build_approval_manifest.py
+  - scripts/validate_human_approval.py
+  - .github/workflows/human-approval-tests.yml
+  - audit/CHUNK_07_PREFLIGHT_v0.1.yaml
+
+ci_evidence:
+  workflow_name: Human Approval Tests
+  run_id: 36160294867
+  job_id: 108154904978
+  head_sha: 53b910fbc6dca078dd44e9a3ac87ee2b5502b376
+  gate: HUMAN-APPROVAL-GATE
+  gate_result: PASS
+  blocking_tests: 0
+
+test_results:
+  HA-T001_approval_schema_valid: PASS
+  HA-T002_five_required_artifacts_bound: PASS
+  HA-T003_all_sha256_hashes_valid: PASS
+  HA-T004_manifest_digest_valid: PASS
+  HA-T005_synthetic_reviewer_identity_present: PASS
+  HA-T006_authorized_channel_present: PASS
+  HA-T007_approved_state_sets_gate_07_pass: PASS
+  HA-T008_artifact_mutation_invalidates_approval: PASS
+  HA-T009_approval_blocked_when_qa_not_ready: PASS
+  HA-T010_test_fixture_marker_present: PASS
+
+defect_history:
+  - id: DEF-07-001
+    severity: low
+    status: fixed
+    description: >
+      The first CI run checked for GOLDEN_TEST while the fixture approval ID
+      used GOLDEN-TEST.
+    correction: >
+      Aligned the test marker assertion with the fixture naming convention.
+    verification_run_id: 36160294867
+    verification_result: PASS
+
+observations:
+  - id: OBS-07-001
+    severity: info
+    text: The approved golden fixture is synthetic test evidence only and is not a real human approval.
+  - id: OBS-07-002
+    severity: info
+    text: Production approval must supply a real reviewer identity, explicit authorized channels, and an exact manifest digest.
+  - id: OBS-07-003
+    severity: info
+    text: Any mutation of an approved artifact invalidates the approval and requires a new decision.
+
+gate:
+  id: HUMAN-APPROVAL-GATE
+  result: PASS
+  blockers: 0
+  next_chunk: CHUNK-08

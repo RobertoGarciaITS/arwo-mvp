@@ -37,7 +37,10 @@ chunks:
       gate_result: PASS
     - id: CHUNK-07
       name: Human Approval
-      status: ready
+      status: completed
+      gate: HUMAN-APPROVAL-GATE
+      gate_result: PASS
+      note: Mechanism validated with synthetic golden approval only.
     - id: CHUNK-08
       name: Controlled Publication
-      status: planned
+      status: ready

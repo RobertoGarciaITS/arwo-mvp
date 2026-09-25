@@ -1,0 +1,40 @@
+test_suite:
+  id: ARWO-HA-TESTS-001
+  component: Human Approval
+  version: "0.1"
+
+tests:
+  - id: HA-T001
+    name: approval_schema_valid
+    blocking: true
+  - id: HA-T002
+    name: five_required_artifacts_bound
+    blocking: true
+  - id: HA-T003
+    name: all_sha256_hashes_valid
+    blocking: true
+  - id: HA-T004
+    name: manifest_digest_valid
+    blocking: true
+  - id: HA-T005
+    name: synthetic_reviewer_identity_present
+    blocking: true
+  - id: HA-T006
+    name: authorized_channel_present
+    blocking: true
+  - id: HA-T007
+    name: approved_state_sets_gate_07_pass
+    blocking: true
+  - id: HA-T008
+    name: artifact_mutation_invalidates_approval
+    blocking: true
+  - id: HA-T009
+    name: approval_blocked_when_qa_not_ready
+    blocking: true
+  - id: HA-T010
+    name: approval_is_explicitly_marked_as_test_fixture
+    blocking: true
+
+gate:
+  id: HUMAN-APPROVAL-GATE
+  pass_condition: all_blocking_tests_pass

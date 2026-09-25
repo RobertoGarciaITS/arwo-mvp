@@ -1,8 +1,8 @@
 project_state:
   project_id: ARWO
   version: "0.1"
-  current_phase: approval_readiness
-  current_chunk: CHUNK-06
+  current_phase: publication_readiness
+  current_chunk: CHUNK-07
   source_of_truth_target: github
 
 progress:
@@ -14,17 +14,19 @@ progress:
   forms_integration: 100
   publication: 100
   qa_orchestrator: 100
-  approval_workflow: 0
+  approval_workflow: 100
+  controlled_publication: 0
 
 last_gate:
-  id: QA-ORCHESTRATOR-GATE
+  id: HUMAN-APPROVAL-GATE
   result: PASS
 
-qa_readiness:
-  overall_result: READY_FOR_HUMAN_APPROVAL
-  blocking_findings: 0
+approval_readiness:
+  mechanism_validated: true
+  production_human_approval_completed: false
+  note: Synthetic golden approval validates the mechanism only.
 
 next_chunk:
-  id: CHUNK-07
-  name: Human Approval
+  id: CHUNK-08
+  name: Controlled Publication
   status: READY

@@ -1,0 +1,40 @@
+name: Human Approval Tests
+
+on:
+  pull_request:
+    paths:
+      - "agents/human_approval/**"
+      - "skills/human_approval/**"
+      - "schemas/APPROVAL_OUTPUT_SCHEMA_v0.1.json"
+      - "tests/HUMAN_APPROVAL_TESTS_v0.1.yaml"
+      - "scripts/build_approval_manifest.py"
+      - "scripts/validate_human_approval.py"
+      - "scripts/run_qa_orchestrator.py"
+      - "scripts/build_google_form_spec.py"
+      - "tests/golden/GTC001_GAMING_QA_ENGINEER/**"
+      - ".github/workflows/human-approval-tests.yml"
+      - "requirements-dev.txt"
+  push:
+    branches: [main]
+    paths:
+      - "agents/human_approval/**"
+      - "skills/human_approval/**"
+      - "schemas/APPROVAL_OUTPUT_SCHEMA_v0.1.json"
+      - "tests/HUMAN_APPROVAL_TESTS_v0.1.yaml"
+      - "scripts/build_approval_manifest.py"
+      - "scripts/validate_human_approval.py"
+
+jobs:
+  validate-human-approval:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - name: Install validation dependencies
+        run: python -m pip install -r requirements-dev.txt
+      - name: Run Human Approval gate
+        run: python scripts/validate_human_approval.py
