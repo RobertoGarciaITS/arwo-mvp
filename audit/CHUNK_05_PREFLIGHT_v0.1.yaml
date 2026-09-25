@@ -1,0 +1,41 @@
+preflight:
+  chunk_id: CHUNK-05
+  name: Publication Generator
+  version: "0.1"
+
+dependencies:
+  - contracts/JOB_REQUISITION_CONTRACT_v0.1.yaml
+  - contracts/PUBLICATION_CONTRACT_v0.1.yaml
+  - tests/golden/GTC001_GAMING_QA_ENGINEER/EXPECTED_JOB_NORMALIZED_v0.1.yaml
+  - audit/CHUNK_04_AUDIT_REPORT_v0.1.yaml
+
+checks:
+  - id: PF-05-001
+    description: Form Builder gate passed
+    result: pass
+  - id: PF-05-002
+    description: publication contract exists
+    result: pass
+  - id: PF-05-003
+    description: publication policy defined
+    result: pass
+  - id: PF-05-004
+    description: output schema defined
+    result: pass
+  - id: PF-05-005
+    description: agent contract defined
+    result: pass
+  - id: PF-05-006
+    description: skill defined
+    result: pass
+  - id: PF-05-007
+    description: prompt defined
+    result: pass
+  - id: PF-05-008
+    description: external publishing explicitly out of scope for this chunk
+    result: pass
+
+gate:
+  result: PASS
+  blockers: 0
+  next_action: create golden publication and deterministic consistency tests
