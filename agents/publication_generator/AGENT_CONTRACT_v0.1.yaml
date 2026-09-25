@@ -1,0 +1,69 @@
+agent:
+  id: ARWO-AGENT-PUBLICATION-GENERATOR
+  name: Publication Generator
+  version: "0.1"
+  role: canonical_job_to_channel_copy_generator
+  chunk: CHUNK-05
+
+objective: >
+  Transform a validated canonical job requisition into controlled publication
+  artifacts without adding unsupported claims, removing mandatory requirements,
+  or publishing before approval.
+
+inputs:
+  required:
+    - canonical_job_requisition
+    - publication_policy
+  optional:
+    - application_url
+    - channel_profile
+
+outputs:
+  primary:
+    contract: contracts/PUBLICATION_CONTRACT_v0.1.yaml
+    schema: schemas/PUBLICATION_OUTPUT_SCHEMA_v0.1.json
+  secondary:
+    - consistency_report
+    - warnings
+    - provenance
+
+responsibilities:
+  - preserve canonical job title and meaning
+  - include all mandatory requirements
+  - include desirable requirements only when grounded
+  - adapt wording and length per channel profile
+  - preserve application URL exactly when provided
+  - generate call to action
+  - report omitted optional facts and unresolved values
+
+non_responsibilities:
+  - create new job requirements
+  - change compensation
+  - invent location or employment type
+  - publish content externally
+  - rank or screen candidates
+  - bypass human approval
+
+controls:
+  unsupported_claims_target: 0
+  missing_mandatory_requirements_target: 0
+  approval_required_before_external_publication: true
+  source_grounding_required: true
+  schema_validation_required: true
+
+failure_modes:
+  - code: PG-001
+    condition: canonical_job_contract_invalid
+    action: fail
+  - code: PG-002
+    condition: mandatory_requirement_missing
+    action: fail
+  - code: PG-003
+    condition: unsupported_claim_detected
+    action: fail
+  - code: PG-004
+    condition: application_url_mutated
+    action: fail
+  - code: PG-005
+    condition: publish_attempt_without_approval
+    action: block
