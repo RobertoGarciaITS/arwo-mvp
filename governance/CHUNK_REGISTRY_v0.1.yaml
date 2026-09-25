@@ -7,10 +7,12 @@ chunks:
       status: completed
     - id: CHUNK-01B
       name: Repository Bootstrap & Governance
-      status: in_progress
+      status: completed
+      gate: REPOSITORY-BASELINE
+      gate_result: PASS
     - id: CHUNK-02
       name: Job Normalizer
-      status: blocked_by_CHUNK-01B
+      status: ready
     - id: CHUNK-03
       name: Questionnaire Generator
       status: planned
