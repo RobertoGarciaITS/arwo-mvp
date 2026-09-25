@@ -1,0 +1,67 @@
+audit:
+  id: ARWO-AUD-MASTER-CONTRACT-001
+  version: "0.1"
+  repository: RobertoGarciaITS/arwo-mvp
+  branch: architecture/arwo-phase-02-master-contract
+
+purpose: >
+  Verify that ARWO has explicit governing artifacts for project scope, use
+  cases, technology stack, file classes, code responsibilities, human and
+  technical roles, MVP evolution, and Phase-02 runtime integration.
+
+checks:
+  - id: MC-AUD-001
+    area: scope
+    result: PASS
+    evidence: architecture/ARWO_MASTER_PROJECT_CONTRACT_v0.2.yaml
+  - id: MC-AUD-002
+    area: use_cases
+    result: PASS
+    evidence: architecture/ARWO_MASTER_PROJECT_CONTRACT_v0.2.yaml
+  - id: MC-AUD-003
+    area: technology_stack
+    result: PASS
+    evidence:
+      - architecture/ARWO_MASTER_PROJECT_CONTRACT_v0.2.yaml
+      - architecture/TECHNOLOGY_STACK_CONTRACT_v0.1.yaml
+  - id: MC-AUD-004
+    area: file_classes_and_repository_usage
+    result: PASS
+    evidence:
+      - architecture/ARWO_MASTER_PROJECT_CONTRACT_v0.2.yaml
+      - governance/REPOSITORY_CONTRACT_v0.1.yaml
+  - id: MC-AUD-005
+    area: code_responsibility_boundary
+    result: PASS
+    evidence: architecture/ARWO_MASTER_PROJECT_CONTRACT_v0.2.yaml
+  - id: MC-AUD-006
+    area: roles_and_responsibilities
+    result: PASS
+    evidence: governance/ROLE_RESPONSIBILITY_MATRIX_v0.1.yaml
+  - id: MC-AUD-007
+    area: mvp_evolution
+    result: PASS
+    evidence: governance/MVP_REGISTRY_v0.1.yaml
+  - id: MC-AUD-008
+    area: phase_02_scope
+    result: PASS
+    evidence: architecture/PHASE_02_RUNTIME_INTEGRATION_CONTRACT_v0.1.yaml
+
+findings:
+  - id: MC-FND-001
+    severity: info
+    text: >
+      The previous repository already contained most of these concepts, but
+      they were distributed across Project Charter, HLD, Repository Contract,
+      Execution Plan and component contracts.
+  - id: MC-FND-002
+    severity: info
+    text: >
+      ARWO_MASTER_PROJECT_CONTRACT_v0.2 now acts as the governing aggregation
+      layer instead of replacing lower-level component contracts.
+
+gate:
+  id: MASTER-PROJECT-CONTRACT-GATE
+  result: PASS
+  blockers: 0
+  next_action: execute P2-CHUNK-01 Runtime Configuration and Secrets Baseline
