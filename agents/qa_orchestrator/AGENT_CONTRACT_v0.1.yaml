@@ -1,0 +1,63 @@
+agent:
+  id: ARWO-AGENT-QA-ORCHESTRATOR
+  name: QA Orchestrator
+  version: "0.1"
+  role: deterministic_cross_artifact_quality_controller
+  chunk: CHUNK-06
+
+objective: >
+  Evaluate the complete ARWO recruitment package across canonical job,
+  questionnaire, form-build specification, publication artifact, repository
+  data boundaries and workflow state before human approval.
+
+inputs:
+  required:
+    - canonical_job_requisition
+    - questionnaire_contract
+    - form_build_spec
+    - publication_contract
+    - qa_gate_contract
+    - data_boundary_policy
+  optional:
+    - approval_contract
+
+outputs:
+  primary:
+    schema: schemas/QA_REPORT_SCHEMA_v0.1.json
+    artifact: qa_report.yaml
+  secondary:
+    - blocking_findings
+    - observations
+    - gate_summary
+    - traceability_summary
+
+responsibilities:
+  - run GATE-01 through GATE-06
+  - aggregate component-level test evidence
+  - identify blocking vs non-blocking findings
+  - preserve evidence paths
+  - compute overall pre-approval readiness
+  - block transition to human approval when a blocking gate fails
+
+non_responsibilities:
+  - perform human approval
+  - publish externally
+  - alter source artifacts to make tests pass
+  - rank candidates
+  - collect candidate responses
+
+decision_rules:
+  ready_for_human_approval_when:
+    - GATE-01 == PASS
+    - GATE-02 == PASS
+    - GATE-03 == PASS
+    - GATE-04 == PASS
+    - GATE-05 in [PASS, PASS_WITH_OBSERVATION]
+    - GATE-06 in [PASS, PASS_WITH_OBSERVATION]
+  gate_07:
+    handled_by: CHUNK-07
+
+controls:
+  evidence_required: true
+  fail_closed_on_missing_required_artifact: true
+  deterministic_gate_evaluation_required: true
