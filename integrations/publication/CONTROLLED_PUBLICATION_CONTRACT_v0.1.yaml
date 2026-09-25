@@ -1,0 +1,74 @@
+component:
+  id: ARWO-CONTROLLED-PUBLICATION
+  name: Controlled Publication Gate
+  version: "0.1"
+  chunk: CHUNK-08
+  type: deterministic_release_control
+
+objective: >
+  Prevent any external publication unless the current artifact package exactly
+  matches an approved manifest and the requested target channel is explicitly
+  authorized by the human approval decision.
+
+inputs:
+  required:
+    - approval_output
+    - current_job_contract
+    - current_questionnaire_contract
+    - current_form_build_spec
+    - current_publication_contract
+    - current_qa_report
+    - requested_channel
+
+outputs:
+  - publication_execution_plan
+  - release_gate_result
+  - blocking_findings
+  - verification_evidence
+
+preconditions:
+  approval_status: approved
+  gate_07_result: PASS
+  exact_manifest_match: true
+  requested_channel_authorized: true
+
+release_states:
+  - blocked
+  - ready_for_controlled_execution
+  - executed
+
+controls:
+  fail_closed: true
+  artifact_rehash_required_immediately_before_execution: true
+  channel_authorization_required: true
+  approval_manifest_digest_required: true
+  publication_contract_status_must_be_approved_or_draft_with_separate_execution_gate: true
+  external_action_not_performed_by_static_ci: true
+  idempotency_key_required_for_runtime_execution: true
+
+non_responsibilities:
+  - candidate screening
+  - human approval
+  - changing approved content
+  - storing external credentials in GitHub
+  - silently retrying a failed external publication
+
+failure_modes:
+  - code: CP-001
+    condition: approval_not_approved
+    action: block
+  - code: CP-002
+    condition: gate_07_not_pass
+    action: block
+  - code: CP-003
+    condition: manifest_digest_mismatch
+    action: block
+  - code: CP-004
+    condition: artifact_hash_mismatch
+    action: block
+  - code: CP-005
+    condition: requested_channel_not_authorized
+    action: block
+  - code: CP-006
+    condition: external_credentials_unavailable
+    action: remain_ready_but_not_executed
