@@ -1,0 +1,87 @@
+project:
+  id: ARWO
+  name: AI Recruitment Workflow Orchestrator
+  version: "0.1"
+  status: design_baseline
+  objective: >
+    Convert unstructured job requisitions into standardized, traceable,
+    validated and human-approved recruitment artifacts for forms,
+    email review and publication channels.
+  primary_user_roles:
+    - hiring_manager
+    - recruiter
+    - hr_reviewer
+    - qa_reviewer
+    - system_administrator
+
+problem_statement:
+  current_state:
+    - job requisitions arrive as unstructured text or documents
+    - form questions are manually created and inconsistently typed
+    - requirements can be lost between job description and screening form
+    - publication copy may diverge from the approved requisition
+    - approval evidence and traceability are weak
+  target_state:
+    - one canonical job contract drives downstream artifacts
+    - each mandatory requirement is traceable
+    - forms are generated from controlled policies
+    - automated QA runs before human approval
+    - publication occurs only after explicit approval
+
+scope:
+  in_scope:
+    - job intake
+    - semantic normalization
+    - requirement classification
+    - screening question design
+    - form specification generation
+    - publication copy generation
+    - quality gates
+    - human approval
+    - workflow state tracking
+    - auditability
+  out_of_scope_v0_1:
+    - autonomous candidate rejection without explicit business rules
+    - candidate psychometric inference
+    - automated final hiring decision
+    - background checks
+    - payroll
+    - onboarding
+    - full ATS replacement
+
+success_criteria:
+  - id: SC-001
+    metric: mandatory_requirement_question_coverage
+    target: "100%"
+  - id: SC-002
+    metric: orphan_question_rate
+    target: "0%"
+  - id: SC-003
+    metric: unsupported_publication_claims
+    target: "0"
+  - id: SC-004
+    metric: publication_without_human_approval
+    target: "0"
+  - id: SC-005
+    metric: versioned_artifact_coverage
+    target: "100%"
+
+mvp_input:
+  types: [plain_text, email_body, docx, pdf, google_doc]
+
+mvp_outputs:
+  - job_contract.yaml
+  - questionnaire_contract.yaml
+  - form_build_spec.json
+  - publication_contract.yaml
+  - approval_contract.yaml
+  - qa_report.yaml
+  - workflow_state.yaml
+
+governance:
+  approval_required: true
+  human_in_the_loop: true
+  pii_policy:
+    github_candidate_pii_allowed: false
+    operational_storage_required: true
+  audit_log_required: true
