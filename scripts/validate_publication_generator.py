@@ -102,7 +102,7 @@ def main() -> int:
     check(pub["status"] == "draft", "PG-T010", "default publication status is draft", failures)
     check(pub["consistency"]["unsupported_claims"] == 0, "PG-T011", "unsupported claims reported as zero", failures)
 
-    linkedin_profile = policy["policy"]["channel_profiles"]["linkedin_social"]
+    linkedin_profile = policy["channel_profiles"]["linkedin_social"]
     headline_ok = len(content["headline"] or "") <= linkedin_profile["headline_max_chars"]
     summary_ok = len(content["summary"]) <= linkedin_profile["summary_max_chars"]
     check(headline_ok and summary_ok, "PG-T012", "LinkedIn profile length limits respected", failures)
