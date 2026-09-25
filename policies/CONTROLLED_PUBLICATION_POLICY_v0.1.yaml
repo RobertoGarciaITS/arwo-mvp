@@ -1,0 +1,44 @@
+policy:
+  id: ARWO-CONTROLLED-PUBLICATION
+  version: "0.1"
+
+gate:
+  required_approval_status: approved
+  required_gate_07_result: PASS
+  exact_manifest_match_required: true
+  exact_artifact_hash_match_required: true
+  authorized_channel_required: true
+  fail_closed: true
+
+runtime:
+  idempotency:
+    required: true
+    algorithm: sha256
+    inputs:
+      - approval_id
+      - manifest_digest
+      - requested_channel
+      - publication_id
+  secrets:
+    repository_storage_allowed: false
+    runtime_secret_store_required: true
+  external_execution:
+    static_ci_allowed: false
+    retry_requires_idempotency_check: true
+
+channel_policy:
+  linkedin_social:
+    adapter_status: planned
+  company_site:
+    adapter_status: planned
+  email:
+    adapter_status: planned
+  whatsapp:
+    adapter_status: planned
+  other:
+    adapter_status: planned
+
+audit:
+  execution_plan_required: true
+  pre_execution_verification_required: true
+  external_result_receipt_required_at_runtime: true

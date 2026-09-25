@@ -43,4 +43,7 @@ chunks:
       note: Mechanism validated with synthetic golden approval only.
     - id: CHUNK-08
       name: Controlled Publication
-      status: ready
+      status: completed
+      gate: CONTROLLED-PUBLICATION-GATE
+      gate_result: PASS
+      note: Release mechanism validated; no real external publication executed.

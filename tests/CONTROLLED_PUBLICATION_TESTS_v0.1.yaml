@@ -1,0 +1,46 @@
+test_suite:
+  id: ARWO-CP-TESTS-001
+  component: Controlled Publication
+  version: "0.1"
+
+tests:
+  - id: CP-T001
+    name: execution_plan_schema_valid
+    blocking: true
+  - id: CP-T002
+    name: approved_status_required
+    blocking: true
+  - id: CP-T003
+    name: gate_07_pass_required
+    blocking: true
+  - id: CP-T004
+    name: exact_manifest_match_required
+    blocking: true
+  - id: CP-T005
+    name: all_artifact_hashes_match
+    blocking: true
+  - id: CP-T006
+    name: authorized_channel_required
+    blocking: true
+  - id: CP-T007
+    name: idempotency_key_deterministic
+    blocking: true
+  - id: CP-T008
+    name: artifact_mutation_blocks_execution
+    blocking: true
+  - id: CP-T009
+    name: unauthorized_channel_blocks_execution
+    blocking: true
+  - id: CP-T010
+    name: static_ci_never_executes_external_action
+    blocking: true
+  - id: CP-T011
+    name: synthetic_fixture_explicitly_nonproduction
+    blocking: true
+  - id: CP-T012
+    name: ready_state_when_all_release_checks_pass
+    blocking: true
+
+gate:
+  id: CONTROLLED-PUBLICATION-GATE
+  pass_condition: all_blocking_tests_pass
