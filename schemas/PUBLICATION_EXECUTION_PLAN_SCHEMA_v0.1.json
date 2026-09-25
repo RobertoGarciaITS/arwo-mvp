@@ -1,0 +1,27 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "urn:arwo:publication-execution-plan:v0.1",
+  "title": "ARWO Publication Execution Plan",
+  "type": "object",
+  "required": [
+    "execution_plan_id", "job_id", "publication_id", "approval_id",
+    "requested_channel", "status", "manifest_digest",
+    "idempotency_key", "checks", "blocking_findings", "next_action"
+  ],
+  "properties": {
+    "execution_plan_id": {"type": "string"},
+    "job_id": {"type": "string"},
+    "publication_id": {"type": "string"},
+    "approval_id": {"type": "string"},
+    "requested_channel": {"type": "string"},
+    "status": {
+      "enum": ["BLOCKED", "READY_FOR_CONTROLLED_EXECUTION", "EXECUTED"]
+    },
+    "manifest_digest": {"type": "string", "pattern": "^[a-f0-9]{64}$"},
+    "idempotency_key": {"type": "string", "pattern": "^[a-f0-9]{64}$"},
+    "checks": {"type": "array"},
+    "blocking_findings": {"type": "array"},
+    "next_action": {"type": "string"}
+  },
+  "additionalProperties": false
+}
