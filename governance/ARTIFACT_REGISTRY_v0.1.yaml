@@ -72,3 +72,36 @@ artifacts:
     path: architecture/PHASE_02_RUNTIME_INTEGRATION_CONTRACT_v0.1.yaml
     type: phase_contract
     status: governing_baseline
+  - id: ARWO-P2-ARCH-001
+    path: architecture/RUNTIME_CONFIGURATION_CONTRACT_v0.1.yaml
+    type: runtime_configuration_contract
+    status: governing_baseline
+  - id: ARWO-P2-GOV-001
+    path: governance/SECRETS_REGISTRY_v0.1.yaml
+    type: secrets_registry
+    status: governing_baseline
+  - id: ARWO-P2-GOV-002
+    path: governance/ENVIRONMENT_POLICY_v0.1.yaml
+    type: environment_policy
+    status: governing_baseline
+  - id: ARWO-P2-GOV-003
+    path: governance/IAM_RUNTIME_ROLE_MATRIX_v0.1.yaml
+    type: iam_role_matrix
+    status: governing_baseline
+  - id: ARWO-P2-GOV-004
+    path: governance/PHASE_02_CHUNK_REGISTRY_v0.1.yaml
+    type: phase_chunk_registry
+    status: governing_baseline
+  - id: ARWO-P2-SCH-001
+    path: schemas/RUNTIME_CONFIG_SCHEMA_v0.1.json
+    type: runtime_config_schema
+    status: baseline
+  - id: ARWO-P2-TST-001
+    path: tests/P2_RUNTIME_SECURITY_TESTS_v0.1.yaml
+    type: test_contract
+    status: baseline
+  - id: ARWO-P2-AUD-001
+    path: audit/P2_CHUNK_01_AUDIT_REPORT_v0.1.yaml
+    type: audit_report
+    status: pass
+
