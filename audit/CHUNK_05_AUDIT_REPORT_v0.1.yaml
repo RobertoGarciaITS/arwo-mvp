@@ -1,0 +1,68 @@
+audit:
+  id: ARWO-AUD-CHUNK-05-001
+  chunk_id: CHUNK-05
+  name: Publication Generator
+  version: "0.1"
+  repository: RobertoGarciaITS/arwo-mvp
+  branch: feature/arwo-chunk-05-publication-generator
+  pr: 5
+
+artifacts_reviewed:
+  - agents/publication_generator/AGENT_CONTRACT_v0.1.yaml
+  - skills/publication_generation/SKILL.md
+  - prompts/PUBLICATION_GENERATOR_PROMPT_v0.1.md
+  - policies/PUBLICATION_GENERATION_POLICY_v0.1.yaml
+  - schemas/PUBLICATION_OUTPUT_SCHEMA_v0.1.json
+  - tests/PUBLICATION_GENERATOR_TESTS_v0.1.yaml
+  - tests/golden/GTC001_GAMING_QA_ENGINEER/EXPECTED_PUBLICATION_v0.1.yaml
+  - scripts/validate_publication_generator.py
+  - .github/workflows/publication-generator-tests.yml
+
+ci_evidence:
+  workflow_name: Publication Generator Tests
+  run_id: 36157388404
+  job_id: 108145155937
+  head_sha: 464bdd78fe5b096f5b8a0227d6185281276e102c
+  gate: PUBLICATION-GENERATOR-GATE
+  gate_result: PASS
+  blocking_tests: 0
+
+test_results:
+  PG-T001_publication_schema_valid: PASS
+  PG-T002_canonical_title_preserved: PASS
+  PG-T003_all_mandatory_requirements_preserved: PASS
+  PG-T004_no_extra_mandatory_requirements: PASS
+  PG-T005_no_unsupported_location_claim: PASS
+  PG-T006_no_unsupported_compensation_claim: PASS
+  PG-T007_no_unsupported_employment_type_claim: PASS
+  PG-T008_no_invented_experience_years: PASS
+  PG-T009_application_url_preserved: PASS
+  PG-T010_default_status_is_draft: PASS
+  PG-T011_unsupported_claims_zero: PASS
+  PG-T012_channel_profile_length_limits: PASS
+
+defect_history:
+  - id: DEF-05-001
+    severity: low
+    status: fixed
+    description: >
+      Validator initially addressed channel_profiles as a child of policy,
+      while the YAML structure defines channel_profiles at document root.
+    correction: >
+      Corrected validator path and reran CI.
+    verification_run_id: 36157388404
+    verification_result: PASS
+
+observations:
+  - id: OBS-05-001
+    severity: info
+    text: Publication remains draft because application URL is not yet available and human approval has not occurred.
+  - id: OBS-05-002
+    severity: info
+    text: External publishing actions remain explicitly outside CHUNK-05.
+
+gate:
+  id: PUBLICATION-GENERATOR-GATE
+  result: PASS
+  blockers: 0
+  next_chunk: CHUNK-06
