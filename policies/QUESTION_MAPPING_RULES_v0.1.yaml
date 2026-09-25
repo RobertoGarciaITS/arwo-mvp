@@ -12,7 +12,7 @@ rules:
     source_pattern: mandatory_binary_eligibility
     intent: eligibility
     type: single_choice
-    allowed_options: [Yes, No]
+    allowed_options: ["Yes", "No"]
     knockout_allowed: true
   - id: MAP-002
     source_pattern: years_experience
