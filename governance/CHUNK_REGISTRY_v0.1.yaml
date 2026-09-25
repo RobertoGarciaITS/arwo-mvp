@@ -1,0 +1,33 @@
+chunks:
+  project_id: ARWO
+  version: "0.1"
+  sequence:
+    - id: CHUNK-01
+      name: Foundation
+      status: completed
+    - id: CHUNK-01B
+      name: Repository Bootstrap & Governance
+      status: completed
+      gate: REPOSITORY-BASELINE
+      gate_result: PASS
+    - id: CHUNK-02
+      name: Job Normalizer
+      status: ready
+    - id: CHUNK-03
+      name: Questionnaire Generator
+      status: planned
+    - id: CHUNK-04
+      name: Form Builder
+      status: planned
+    - id: CHUNK-05
+      name: Publication Generator
+      status: planned
+    - id: CHUNK-06
+      name: QA Orchestrator
+      status: planned
+    - id: CHUNK-07
+      name: Human Approval
+      status: planned
+    - id: CHUNK-08
+      name: Controlled Publication
+      status: planned

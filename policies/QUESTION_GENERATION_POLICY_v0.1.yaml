@@ -1,0 +1,37 @@
+policy:
+  name: question_generation_policy
+  version: "0.1"
+
+principles:
+  - every mandatory screening requirement must map to at least one question
+  - every generated technical question must trace to at least one source requirement
+  - prefer structured response types over free text when analytics benefit
+  - do not generate protected-characteristic questions unless legally required and separately governed
+  - do not infer requirements absent from source text
+  - knockout questions require explicit mandatory source requirements
+  - free-text evidence questions must not substitute for an explicit eligibility question
+
+mapping_rules:
+  years_experience:
+    preferred_type: integer
+    fallback_type: dropdown
+  yes_no_eligibility:
+    preferred_type: single_choice
+  tool_set:
+    preferred_type: multi_choice
+  single_tool_preference:
+    preferred_type: single_choice
+  technical_feature_coverage:
+    preferred_type: multi_choice
+  salary:
+    preferred_type: decimal
+  notice_period:
+    preferred_type: dropdown
+  linkedin_profile:
+    preferred_type: url
+
+quality_rules:
+  duplicate_semantic_questions_allowed: false
+  orphan_questions_allowed: false
+  mandatory_requirement_coverage_target: "100%"
+  unsupported_question_target: "0"

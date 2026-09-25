@@ -1,0 +1,24 @@
+contract:
+  name: approval
+  version: "0.1"
+
+approval:
+  approval_id: string
+  job_id: string
+  status: enum[pending,changes_requested,approved,rejected]
+  requested_at: datetime
+  artifacts:
+    - artifact_id: string
+      artifact_type: string
+      version: string
+      uri: string|null
+      checksum: string|null
+  reviewer:
+    role: string
+    identity: string|null
+  decision:
+    decided_at: datetime|null
+    comments: string|null
+  publication_authorization:
+    allowed: boolean
+    channels: [string]

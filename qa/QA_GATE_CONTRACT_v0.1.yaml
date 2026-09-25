@@ -1,0 +1,46 @@
+qa_contract:
+  name: arwo_qa_gates
+  version: "0.1"
+
+gates:
+  - id: GATE-01
+    name: job_completeness
+    checks:
+      - canonical_title_present
+      - summary_present
+      - mandatory_requirements_present
+  - id: GATE-02
+    name: requirement_classification
+    checks:
+      - every_requirement_has_category
+      - knockout_only_when_mandatory
+      - no_unsupported_requirements
+  - id: GATE-03
+    name: question_coverage
+    checks:
+      - mandatory_requirement_coverage_equals_100_percent
+      - screening_required_requirements_have_questions
+  - id: GATE-04
+    name: question_consistency
+    checks:
+      - no_duplicate_semantic_questions
+      - no_orphan_technical_questions
+      - question_type_matches_intent
+  - id: GATE-05
+    name: privacy_review
+    checks:
+      - no_candidate_pii_targeted_to_github
+      - sensitive_questions_flagged
+      - resume_storage_location_defined
+  - id: GATE-06
+    name: publication_consistency
+    checks:
+      - no_new_mandatory_requirements_in_publication
+      - no_removed_mandatory_requirements
+      - application_link_matches_approved_form
+  - id: GATE-07
+    name: human_approval
+    checks:
+      - approval_status_equals_approved
+      - reviewer_identity_present
+      - publication_channels_authorized

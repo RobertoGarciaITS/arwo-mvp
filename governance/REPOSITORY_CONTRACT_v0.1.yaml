@@ -1,0 +1,43 @@
+repository:
+  project_id: ARWO
+  project_name: AI Recruitment Workflow Orchestrator
+  version: "0.1"
+  default_branch: main
+  merge_strategy: squash
+  direct_writes_to_main: false
+
+purpose:
+  - source_code
+  - architecture
+  - contracts
+  - schemas
+  - prompts
+  - skills
+  - tests
+  - qa
+  - audit
+  - ci_cd
+
+prohibited_content:
+  - candidate_resumes
+  - candidate_phone_numbers
+  - candidate_personal_emails
+  - application_responses
+  - oauth_tokens
+  - api_keys
+  - service_account_keys
+  - secrets
+
+required_paths:
+  - architecture/
+  - contracts/
+  - schemas/
+  - policies/
+  - agents/
+  - skills/
+  - prompts/
+  - integrations/
+  - tests/golden/
+  - qa/
+  - audit/
+  - docs/

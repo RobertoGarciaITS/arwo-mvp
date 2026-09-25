@@ -1,0 +1,34 @@
+data_boundary:
+  version: "0.1"
+
+github:
+  classification: technical_control_plane
+  allowed:
+    - source_code
+    - prompts
+    - skills
+    - contracts
+    - schemas
+    - synthetic_test_data
+    - qa_reports_without_pii
+    - documentation
+  prohibited:
+    - candidate_pii
+    - resumes
+    - real_application_payloads
+    - authentication_secrets
+
+operational_plane:
+  intended_services:
+    - google_drive
+    - controlled_datastore
+    - ats
+  data:
+    - resumes
+    - candidate_profiles
+    - application_responses
+    - approval_evidence
+
+secrets:
+  target_store: secret_manager
+  never_commit_to_git: true

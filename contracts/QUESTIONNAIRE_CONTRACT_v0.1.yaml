@@ -1,0 +1,42 @@
+contract:
+  name: questionnaire
+  version: "0.1"
+
+question_types:
+  - short_text
+  - paragraph
+  - integer
+  - decimal
+  - single_choice
+  - multi_choice
+  - dropdown
+  - date
+  - url
+  - email
+  - phone
+  - file_upload_manual_template
+
+questionnaire:
+  questionnaire_id: string
+  job_id: string
+  version: string
+  sections:
+    - section_id: string
+      title: string
+      questions:
+        - question_id: string
+          source_requirement_ids:
+            - string
+          label: string
+          help_text: string_or_null
+          intent: identity|contact|eligibility|experience|technical_coverage|tool_proficiency|evidence|compensation|availability|professional_profile|document_upload
+          type: string
+          required: boolean
+          options:
+            - string
+          validation:
+            rule: string_or_null
+          knockout:
+            enabled: boolean
+            reject_when: string_or_null
+          analytics_key: string
