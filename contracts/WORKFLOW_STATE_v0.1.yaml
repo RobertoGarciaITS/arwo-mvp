@@ -1,0 +1,22 @@
+workflow:
+  workflow_id: string
+  job_id: string
+  version: "0.1"
+  state: draft|ingested|normalized|questionnaire_generated|publication_generated|qa_failed|qa_passed|pending_human_approval|changes_requested|approved|published|cancelled
+  previous_state: string_or_null
+  updated_at: datetime
+  actor: string
+  artifacts:
+    job_contract_version: string_or_null
+    questionnaire_version: string_or_null
+    publication_version: string_or_null
+    qa_report_version: string_or_null
+    approval_version: string_or_null
+  gates:
+    GATE_01_job_completeness: pending|pass|fail
+    GATE_02_requirement_classification: pending|pass|fail
+    GATE_03_question_coverage: pending|pass|fail
+    GATE_04_question_consistency: pending|pass|fail
+    GATE_05_privacy_review: pending|pass|fail
+    GATE_06_publication_consistency: pending|pass|fail
+    GATE_07_human_approval: pending|pass|fail
