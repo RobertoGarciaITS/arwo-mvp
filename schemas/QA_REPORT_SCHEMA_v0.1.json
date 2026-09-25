@@ -1,0 +1,40 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "urn:arwo:qa-report:v0.1",
+  "title": "ARWO QA Report",
+  "type": "object",
+  "required": [
+    "report_id", "job_id", "version", "stage",
+    "overall_result", "gates", "blocking_findings",
+    "observations", "traceability_summary", "next_action"
+  ],
+  "properties": {
+    "report_id": {"type": "string"},
+    "job_id": {"type": "string"},
+    "version": {"type": "string"},
+    "stage": {"const": "pre_human_approval"},
+    "overall_result": {
+      "enum": ["READY_FOR_HUMAN_APPROVAL", "BLOCKED"]
+    },
+    "gates": {
+      "type": "array",
+      "minItems": 6,
+      "items": {
+        "type": "object",
+        "required": ["gate_id", "name", "result", "checks"],
+        "properties": {
+          "gate_id": {"type": "string"},
+          "name": {"type": "string"},
+          "result": {"enum": ["PASS", "PASS_WITH_OBSERVATION", "FAIL"]},
+          "checks": {"type": "array"}
+        },
+        "additionalProperties": true
+      }
+    },
+    "blocking_findings": {"type": "array"},
+    "observations": {"type": "array"},
+    "traceability_summary": {"type": "object"},
+    "next_action": {"type": "string"}
+  },
+  "additionalProperties": false
+}
