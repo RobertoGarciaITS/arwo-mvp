@@ -1,0 +1,42 @@
+preflight:
+  chunk_id: CHUNK-02
+  name: Job Normalizer
+  version: "0.1"
+
+dependencies:
+  - contracts/JOB_REQUISITION_CONTRACT_v0.1.yaml
+  - schemas/JOB_REQUISITION_SCHEMA_v0.1.json
+  - governance/DATA_BOUNDARY_POLICY_v0.1.yaml
+  - qa/QA_GATE_CONTRACT_v0.1.yaml
+  - tests/golden/GTC001_GAMING_QA_ENGINEER/GOLDEN_TEST_CASE_001_GAMING_QA_ENGINEER.yaml
+
+checks:
+  - id: PF-02-001
+    description: repository baseline gate passed
+    result: pass
+  - id: PF-02-002
+    description: canonical job contract exists
+    result: pass
+  - id: PF-02-003
+    description: output schema defined
+    result: pass
+  - id: PF-02-004
+    description: agent contract defined
+    result: pass
+  - id: PF-02-005
+    description: skill defined
+    result: pass
+  - id: PF-02-006
+    description: prompt defined
+    result: pass
+  - id: PF-02-007
+    description: golden input fixture defined
+    result: pass
+  - id: PF-02-008
+    description: expected golden output defined
+    result: pass
+
+gate:
+  result: PASS
+  blockers: 0
+  next_action: implement deterministic validation and execute golden tests
