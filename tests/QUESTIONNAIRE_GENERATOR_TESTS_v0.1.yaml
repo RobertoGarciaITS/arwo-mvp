@@ -1,0 +1,46 @@
+test_suite:
+  id: ARWO-QG-TESTS-001
+  component: Questionnaire Generator
+  version: "0.1"
+
+tests:
+  - id: QG-T001
+    name: schema_valid
+    blocking: true
+  - id: QG-T002
+    name: mandatory_screening_coverage_100_percent
+    blocking: true
+  - id: QG-T003
+    name: all_mandatory_requirements_have_question
+    blocking: true
+  - id: QG-T004
+    name: knockout_only_from_mandatory_requirement
+    blocking: true
+  - id: QG-T005
+    name: no_orphan_technical_questions
+    blocking: true
+  - id: QG-T006
+    name: tool_questions_grounded_in_job_tools
+    blocking: true
+  - id: QG-T007
+    name: system_policy_questions_not_misrepresented_as_job_requirements
+    blocking: true
+  - id: QG-T008
+    name: no_duplicate_question_ids
+    blocking: true
+  - id: QG-T009
+    name: deterministic_question_order
+    blocking: true
+  - id: QG-T010
+    name: current_salary_excluded_by_default_profile
+    blocking: true
+  - id: QG-T011
+    name: resume_upload_deferred_to_template_strategy
+    blocking: true
+  - id: QG-T012
+    name: unsupported_technical_questions_zero
+    blocking: true
+
+gate:
+  id: QUESTIONNAIRE-GENERATOR-GATE
+  pass_condition: all_blocking_tests_pass

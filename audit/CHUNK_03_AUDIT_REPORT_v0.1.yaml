@@ -1,0 +1,71 @@
+audit:
+  id: ARWO-AUD-CHUNK-03-001
+  chunk_id: CHUNK-03
+  name: Questionnaire Generator
+  version: "0.1"
+  repository: RobertoGarciaITS/arwo-mvp
+  branch: feature/arwo-chunk-03-questionnaire-generator
+  pr: 3
+
+artifacts_reviewed:
+  - agents/questionnaire_generator/AGENT_CONTRACT_v0.1.yaml
+  - skills/questionnaire_generation/SKILL.md
+  - prompts/QUESTIONNAIRE_GENERATOR_PROMPT_v0.1.md
+  - policies/QUESTION_MAPPING_RULES_v0.1.yaml
+  - schemas/QUESTIONNAIRE_OUTPUT_SCHEMA_v0.1.json
+  - tests/QUESTIONNAIRE_GENERATOR_TESTS_v0.1.yaml
+  - tests/golden/GTC001_GAMING_QA_ENGINEER/EXPECTED_QUESTIONNAIRE_v0.1.yaml
+  - scripts/validate_questionnaire_generator.py
+  - .github/workflows/questionnaire-generator-tests.yml
+
+ci_evidence:
+  workflow_name: Questionnaire Generator Tests
+  run_id: 36106305626
+  head_sha: c6abc12fb7e2e592638c043a147ebf1ede34b226
+  gate: QUESTIONNAIRE-GENERATOR-GATE
+  gate_result: PASS
+  blocking_tests: 0
+
+test_results:
+  QG-T001_schema_valid: PASS
+  QG-T002_mandatory_screening_coverage_100_percent: PASS
+  QG-T003_all_mandatory_requirements_have_question: PASS
+  QG-T004_knockout_only_from_mandatory_requirement: PASS
+  QG-T005_no_orphan_technical_questions: PASS
+  QG-T006_tool_questions_grounded_in_job_tools: PASS
+  QG-T007_system_policy_separation: PASS
+  QG-T008_no_duplicate_question_ids: PASS
+  QG-T009_deterministic_question_order: PASS
+  QG-T010_current_salary_excluded_by_default_profile: PASS
+  QG-T011_resume_upload_template_strategy: PASS
+  QG-T012_unsupported_technical_questions_zero: PASS
+
+defect_history:
+  - id: DEF-03-001
+    severity: low
+    status: fixed
+    description: >
+      YAML parsed unquoted Yes/No option values as booleans, causing schema
+      validation failure in the first CI run.
+    correction: >
+      Quote Yes and No choice values explicitly in the golden questionnaire
+      and mapping policy.
+    verification_run_id: 36106305626
+    verification_result: PASS
+
+observations:
+  - id: OBS-03-001
+    severity: info
+    text: Tool questions use source_tool_names rather than pretending tools are requirement IDs.
+  - id: OBS-03-002
+    severity: info
+    text: Administrative questions are isolated with source_origin system_policy.
+  - id: OBS-03-003
+    severity: info
+    text: Current Salary is intentionally excluded from the default MVP profile pending explicit HR/privacy review.
+
+gate:
+  id: QUESTIONNAIRE-GENERATOR-GATE
+  result: PASS
+  blockers: 0
+  next_chunk: CHUNK-04

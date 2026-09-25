@@ -1,0 +1,70 @@
+policy:
+  id: ARWO-QUESTION-MAPPING-RULES
+  version: "0.1"
+
+source_origins:
+  - job_requirement
+  - job_tool
+  - system_policy
+
+rules:
+  - id: MAP-001
+    source_pattern: mandatory_binary_eligibility
+    intent: eligibility
+    type: single_choice
+    allowed_options: ["Yes", "No"]
+    knockout_allowed: true
+  - id: MAP-002
+    source_pattern: years_experience
+    intent: experience
+    type: integer
+    knockout_allowed: false
+  - id: MAP-003
+    source_pattern: technical_feature_set
+    intent: technical_coverage
+    type: multi_choice
+    knockout_allowed: false
+  - id: MAP-004
+    source_pattern: evidence_examples
+    intent: evidence
+    type: paragraph
+    knockout_allowed: false
+  - id: MAP-005
+    source_pattern: tool_proficiency
+    intent: tool_proficiency
+    type: multi_choice
+    knockout_allowed: false
+  - id: MAP-006
+    source_pattern: professional_profile_url
+    intent: professional_profile
+    type: url
+    source_origin: system_policy
+  - id: MAP-007
+    source_pattern: notice_period
+    intent: availability
+    type: dropdown
+    source_origin: system_policy
+  - id: MAP-008
+    source_pattern: resume_upload
+    intent: document_upload
+    type: file_upload_manual_template
+    source_origin: system_policy
+
+administrative_profile:
+  id: DEFAULT_RECRUITMENT_MVP
+  allowed_fields:
+    - candidate_name
+    - contact_number
+    - current_location
+    - expected_salary
+    - notice_period
+    - linkedin_url
+    - resume_file
+  sensitive_or_optional_review:
+    - current_salary
+
+validation:
+  mandatory_requirement_coverage_target: "100%"
+  orphan_technical_questions_allowed: false
+  unsupported_technical_questions_allowed: false
+  duplicate_semantic_questions_allowed: false

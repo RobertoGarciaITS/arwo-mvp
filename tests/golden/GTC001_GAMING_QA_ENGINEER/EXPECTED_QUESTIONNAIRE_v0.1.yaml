@@ -1,0 +1,262 @@
+questionnaire_id: FORM-GQA-001
+job_id: JOB-GQA-001
+version: "0.1"
+profile: DEFAULT_RECRUITMENT_MVP
+
+sections:
+  - section_id: candidate_information
+    title: Candidate Information
+    questions:
+      - question_id: Q-001
+        label: Name
+        help_text: null
+        intent: identity
+        type: short_text
+        required: true
+        source_origin: system_policy
+        source_requirement_ids: []
+        source_tool_names: []
+        analytics_key: candidate_name
+        validation: {}
+        knockout:
+          enabled: false
+          reject_when: null
+
+      - question_id: Q-002
+        label: Contact Number
+        help_text: null
+        intent: contact
+        type: phone
+        required: true
+        source_origin: system_policy
+        source_requirement_ids: []
+        source_tool_names: []
+        analytics_key: contact_number
+        validation: {}
+        knockout:
+          enabled: false
+          reject_when: null
+
+      - question_id: Q-003
+        label: Current Location
+        help_text: null
+        intent: contact
+        type: short_text
+        required: true
+        source_origin: system_policy
+        source_requirement_ids: []
+        source_tool_names: []
+        analytics_key: current_location
+        validation: {}
+        knockout:
+          enabled: false
+          reject_when: null
+
+  - section_id: experience
+    title: Professional Experience
+    questions:
+      - question_id: Q-004
+        label: Total Professional QA/Testing Experience
+        help_text: Enter total years of professional QA/testing experience.
+        intent: experience
+        type: integer
+        required: true
+        source_origin: job_requirement
+        source_requirement_ids: [REQ-001]
+        source_tool_names: []
+        analytics_key: qa_years
+        validation:
+          minimum: 0
+        knockout:
+          enabled: false
+          reject_when: null
+
+      - question_id: Q-005
+        label: Total Game QA Experience
+        help_text: Enter total years of professional Game QA experience.
+        intent: experience
+        type: integer
+        required: true
+        source_origin: job_requirement
+        source_requirement_ids: [REQ-002]
+        source_tool_names: []
+        analytics_key: game_qa_years
+        validation:
+          minimum: 0
+        knockout:
+          enabled: false
+          reject_when: null
+
+      - question_id: Q-006
+        label: Do you have professional Multiplayer Game Testing experience?
+        help_text: null
+        intent: eligibility
+        type: single_choice
+        required: true
+        options: ["Yes", "No"]
+        source_origin: job_requirement
+        source_requirement_ids: [REQ-003]
+        source_tool_names: []
+        analytics_key: professional_multiplayer_qa
+        validation: {}
+        knockout:
+          enabled: true
+          reject_when: answer == "No"
+
+      - question_id: Q-007
+        label: Name the multiplayer games you professionally tested
+        help_text: Provide examples of multiplayer titles you tested professionally.
+        intent: evidence
+        type: paragraph
+        required: true
+        source_origin: job_requirement
+        source_requirement_ids: [REQ-003]
+        source_tool_names: []
+        analytics_key: multiplayer_titles
+        validation: {}
+        knockout:
+          enabled: false
+          reject_when: null
+
+  - section_id: technical
+    title: Technical Coverage
+    questions:
+      - question_id: Q-008
+        label: Which multiplayer features have you personally tested?
+        help_text: Select all that apply.
+        intent: technical_coverage
+        type: multi_choice
+        required: true
+        options:
+          - Matchmaking
+          - Player Synchronization
+          - Real-time Gameplay
+          - Network & Latency
+          - Multiplayer Game Modes
+          - Lobbies
+          - Other
+        source_origin: job_requirement
+        source_requirement_ids: [REQ-004]
+        source_tool_names: []
+        analytics_key: multiplayer_features
+        validation: {}
+        knockout:
+          enabled: false
+          reject_when: null
+
+      - question_id: Q-009
+        label: Which API testing tools have you used?
+        help_text: Select all that apply.
+        intent: tool_proficiency
+        type: multi_choice
+        required: true
+        options: [Postman, Swagger, None]
+        source_origin: job_tool
+        source_requirement_ids: []
+        source_tool_names: [Postman, Swagger]
+        analytics_key: api_testing_tools
+        validation: {}
+        knockout:
+          enabled: false
+          reject_when: null
+
+      - question_id: Q-010
+        label: Which bug tracking or test management tools have you used?
+        help_text: Select all that apply.
+        intent: tool_proficiency
+        type: multi_choice
+        required: true
+        options: [Jira, ClickUp, Other]
+        source_origin: job_tool
+        source_requirement_ids: []
+        source_tool_names: [Jira, ClickUp]
+        analytics_key: qa_management_tools
+        validation: {}
+        knockout:
+          enabled: false
+          reject_when: null
+
+  - section_id: logistics
+    title: Application Logistics
+    questions:
+      - question_id: Q-011
+        label: Expected Salary
+        help_text: null
+        intent: compensation
+        type: decimal
+        required: false
+        source_origin: system_policy
+        source_requirement_ids: []
+        source_tool_names: []
+        analytics_key: expected_salary
+        validation: {}
+        knockout:
+          enabled: false
+          reject_when: null
+
+      - question_id: Q-012
+        label: Notice Period
+        help_text: null
+        intent: availability
+        type: dropdown
+        required: true
+        options:
+          - Immediate
+          - 1 week
+          - 2 weeks
+          - 30 days
+          - 60 days
+          - 90+ days
+        source_origin: system_policy
+        source_requirement_ids: []
+        source_tool_names: []
+        analytics_key: notice_period
+        validation: {}
+        knockout:
+          enabled: false
+          reject_when: null
+
+      - question_id: Q-013
+        label: LinkedIn Profile Link
+        help_text: null
+        intent: professional_profile
+        type: url
+        required: true
+        source_origin: system_policy
+        source_requirement_ids: []
+        source_tool_names: []
+        analytics_key: linkedin_url
+        validation: {}
+        knockout:
+          enabled: false
+          reject_when: null
+
+      - question_id: Q-014
+        label: Upload Updated Resume
+        help_text: File upload is implemented downstream using the Google Forms template strategy.
+        intent: document_upload
+        type: file_upload_manual_template
+        required: true
+        source_origin: system_policy
+        source_requirement_ids: []
+        source_tool_names: []
+        analytics_key: resume_file
+        validation: {}
+        knockout:
+          enabled: false
+          reject_when: null
+
+coverage:
+  mandatory_screening_requirements_total: 3
+  mandatory_screening_requirements_covered: 3
+  mandatory_screening_coverage_percent: 100
+  orphan_technical_questions: 0
+  unsupported_technical_questions: 0
+  invalid_knockout_rules: 0
+  duplicate_semantic_questions: 0
+
+warnings:
+  - code: QG-W001
+    text: Current salary is excluded from the default MVP profile and may be enabled only after explicit HR/privacy review.
+  - code: QG-W002
+    text: GTC-001 is based on a reconstructed source fixture rather than the complete original vacancy text.

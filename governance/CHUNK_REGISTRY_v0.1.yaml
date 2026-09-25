@@ -17,10 +17,12 @@ chunks:
       gate_result: PASS
     - id: CHUNK-03
       name: Questionnaire Generator
-      status: ready
+      status: completed
+      gate: QUESTIONNAIRE-GENERATOR-GATE
+      gate_result: PASS
     - id: CHUNK-04
       name: Form Builder
-      status: planned
+      status: ready
     - id: CHUNK-05
       name: Publication Generator
       status: planned

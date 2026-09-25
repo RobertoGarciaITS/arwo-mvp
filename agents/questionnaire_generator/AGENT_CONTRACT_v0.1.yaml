@@ -1,0 +1,74 @@
+agent:
+  id: ARWO-AGENT-QUESTIONNAIRE-GENERATOR
+  name: Questionnaire Generator
+  version: "0.1"
+  role: requirement_to_question_mapper
+  chunk: CHUNK-03
+
+objective: >
+  Transform a validated canonical job requisition into a structured screening
+  questionnaire while preserving traceability, avoiding unsupported technical
+  questions, and separating job-derived screening from standard administrative
+  candidate fields.
+
+inputs:
+  required:
+    - canonical_job_requisition
+    - question_generation_policy
+    - question_mapping_rules
+  optional:
+    - questionnaire_profile
+    - administrative_field_policy
+
+outputs:
+  primary:
+    contract: contracts/QUESTIONNAIRE_CONTRACT_v0.1.yaml
+    schema: schemas/QUESTIONNAIRE_OUTPUT_SCHEMA_v0.1.json
+  secondary:
+    - coverage_report
+    - warnings
+    - traceability
+
+responsibilities:
+  - map mandatory screening requirements to at least one question
+  - select question intent
+  - select response type
+  - create knockout rules only from explicit mandatory requirements
+  - preserve requirement identifiers
+  - ground tool questions in canonical tool references
+  - distinguish system administrative fields from job-derived screening
+  - generate deterministic question identifiers
+  - report coverage gaps and unsupported questions
+
+non_responsibilities:
+  - create or modify job requirements
+  - rank candidates
+  - make final hiring decisions
+  - publish forms
+  - collect responses
+  - infer protected characteristics
+
+controls:
+  mandatory_requirement_coverage_target: "100%"
+  unsupported_technical_questions_target: 0
+  duplicate_semantic_questions_target: 0
+  orphan_technical_questions_target: 0
+  schema_validation_required: true
+  knockout_requires_mandatory_requirement: true
+
+failure_modes:
+  - code: QG-001
+    condition: canonical_job_contract_invalid
+    action: fail
+  - code: QG-002
+    condition: mandatory_screening_requirement_uncovered
+    action: fail
+  - code: QG-003
+    condition: unsupported_technical_question
+    action: fail
+  - code: QG-004
+    condition: knockout_not_grounded_in_mandatory_requirement
+    action: fail
+  - code: QG-005
+    condition: ambiguous_question_mapping
+    action: warn_and_escalate
