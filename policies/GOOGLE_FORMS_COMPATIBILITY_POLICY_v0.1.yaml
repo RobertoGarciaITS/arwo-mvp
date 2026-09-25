@@ -1,0 +1,61 @@
+policy:
+  id: ARWO-GOOGLE-FORMS-COMPATIBILITY
+  version: "0.1"
+
+supported_mappings:
+  short_text:
+    google_kind: textQuestion
+    paragraph: false
+  paragraph:
+    google_kind: textQuestion
+    paragraph: true
+  integer:
+    google_kind: textQuestion
+    paragraph: false
+    note: numeric response validation is retained in ARWO metadata but not emitted in v0.1 API payload
+  decimal:
+    google_kind: textQuestion
+    paragraph: false
+    note: numeric response validation is retained in ARWO metadata but not emitted in v0.1 API payload
+  phone:
+    google_kind: textQuestion
+    paragraph: false
+  email:
+    google_kind: textQuestion
+    paragraph: false
+  url:
+    google_kind: textQuestion
+    paragraph: false
+  single_choice:
+    google_kind: choiceQuestion
+    google_type: RADIO
+  multi_choice:
+    google_kind: choiceQuestion
+    google_type: CHECKBOX
+  dropdown:
+    google_kind: choiceQuestion
+    google_type: DROP_DOWN
+  date:
+    google_kind: dateQuestion
+
+deferred_mappings:
+  file_upload_manual_template:
+    google_kind: fileUploadQuestion
+    strategy: template_required
+    api_create_supported: false
+
+section_mapping:
+  google_kind: pageBreakItem
+
+rules:
+  preserve_question_order: true
+  preserve_section_order: true
+  preserve_required_flag: true
+  preserve_option_order: true
+  unsupported_question_type_action: fail
+  file_upload_action: defer_to_template
+  batch_request_indices_must_be_sequential: true
+
+traceability:
+  stored_in_google_payload: false
+  stored_in_build_spec: true
