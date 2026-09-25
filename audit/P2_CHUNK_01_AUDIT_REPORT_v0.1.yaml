@@ -1,0 +1,65 @@
+audit:
+  id: ARWO-AUD-P2-CHUNK-01-001
+  phase: PHASE-02
+  chunk_id: P2-CHUNK-01
+  name: Runtime Configuration and Secrets Baseline
+  version: "0.1"
+  repository: RobertoGarciaITS/arwo-mvp
+  branch: architecture/arwo-p2-chunk-01-runtime-security-baseline
+  pr: 10
+
+artifacts_reviewed:
+  - architecture/RUNTIME_CONFIGURATION_CONTRACT_v0.1.yaml
+  - governance/SECRETS_REGISTRY_v0.1.yaml
+  - governance/ENVIRONMENT_POLICY_v0.1.yaml
+  - governance/IAM_RUNTIME_ROLE_MATRIX_v0.1.yaml
+  - governance/PHASE_02_CHUNK_REGISTRY_v0.1.yaml
+  - schemas/RUNTIME_CONFIG_SCHEMA_v0.1.json
+  - config/runtime.env.example
+  - tests/P2_RUNTIME_SECURITY_TESTS_v0.1.yaml
+  - scripts/validate_runtime_security.py
+  - .github/workflows/p2-runtime-security-tests.yml
+  - audit/P2_CHUNK_01_PREFLIGHT_v0.1.yaml
+
+ci_evidence:
+  workflow_name: Phase 02 Runtime Security Tests
+  run_id: 36171578001
+  job_id: 108192141788
+  head_sha: 63c0c8eb24b36ff052b5fab137b7926044d54a27
+  gate: P2-GATE-01-RUNTIME-SECURITY
+  gate_result: PASS
+  blocking_tests: 0
+
+test_results:
+  P2RS-T001_runtime_config_schema_valid: PASS
+  P2RS-T002_example_environment_is_sandbox: PASS
+  P2RS-T003_publication_disabled_by_default: PASS
+  P2RS-T004_no_secret_values_in_example: PASS
+  P2RS-T005_registered_secrets_forbid_git_values: PASS
+  P2RS-T006_production_requires_real_human_approval: PASS
+  P2RS-T007_runtime_service_not_project_owner: PASS
+  P2RS-T008_deployer_runtime_identity_separated: PASS
+  P2RS-T009_candidate_pii_outside_github: PASS
+  P2RS-T010_secret_reference_registry_consistent: PASS
+
+observations:
+  - id: P2OBS-001
+    severity: info
+    text: >
+      This chunk validates the runtime security contract and configuration
+      structure only. No real GCP project, service account, OAuth credential,
+      or Secret Manager secret was created.
+  - id: P2OBS-002
+    severity: info
+    text: >
+      External integrations remain disabled in the committed sandbox example.
+  - id: P2OBS-003
+    severity: info
+    text: >
+      Secret logical names are versioned in Git; secret values remain external.
+
+gate:
+  id: P2-GATE-01-RUNTIME-SECURITY
+  result: PASS
+  blockers: 0
+  next_chunk: P2-CHUNK-02
