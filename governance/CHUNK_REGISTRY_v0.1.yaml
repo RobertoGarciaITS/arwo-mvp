@@ -12,10 +12,12 @@ chunks:
       gate_result: PASS
     - id: CHUNK-02
       name: Job Normalizer
-      status: ready
+      status: completed
+      gate: JOB-NORMALIZER-GATE
+      gate_result: PASS
     - id: CHUNK-03
       name: Questionnaire Generator
-      status: planned
+      status: ready
     - id: CHUNK-04
       name: Form Builder
       status: planned

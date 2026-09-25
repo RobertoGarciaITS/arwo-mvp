@@ -1,25 +1,25 @@
 project_state:
   project_id: ARWO
   version: "0.1"
-  current_phase: foundation_complete
-  current_chunk: CHUNK-01B
+  current_phase: core_generation
+  current_chunk: CHUNK-02
   source_of_truth_target: github
 
 progress:
   architecture: 100
   contracts: 100
   repository_bootstrap: 100
-  job_normalizer: 0
+  job_normalizer: 100
   questionnaire_generator: 0
   forms_integration: 0
   approval_workflow: 0
   publication: 0
 
 last_gate:
-  id: REPOSITORY-BASELINE
+  id: JOB-NORMALIZER-GATE
   result: PASS
 
 next_chunk:
-  id: CHUNK-02
-  name: Job Normalizer
+  id: CHUNK-03
+  name: Questionnaire Generator
   status: READY

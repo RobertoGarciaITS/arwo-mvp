@@ -1,0 +1,67 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "urn:arwo:job-normalizer-output:v0.1",
+  "title": "ARWO Job Normalizer Output",
+  "type": "object",
+  "required": ["job_id", "source", "job", "warnings", "missing_fields", "provenance"],
+  "properties": {
+    "job_id": {"type": "string", "minLength": 1},
+    "source": {
+      "type": "object",
+      "required": ["source_type", "source_reference"],
+      "properties": {
+        "source_type": {"type": "string"},
+        "source_reference": {"type": "string"}
+      },
+      "additionalProperties": true
+    },
+    "job": {
+      "type": "object",
+      "required": ["title", "summary", "responsibilities", "requirements", "tools"],
+      "properties": {
+        "title": {
+          "type": "object",
+          "required": ["raw", "canonical"],
+          "properties": {
+            "raw": {"type": "string"},
+            "canonical": {"type": "string", "minLength": 1}
+          },
+          "additionalProperties": false
+        },
+        "department": {"type": ["string", "null"]},
+        "employment_type": {"type": ["string", "null"]},
+        "location": {
+          "type": "object",
+          "required": ["mode", "city", "region", "country"],
+          "properties": {
+            "mode": {"enum": ["onsite", "hybrid", "remote", "unspecified"]},
+            "city": {"type": ["string", "null"]},
+            "region": {"type": ["string", "null"]},
+            "country": {"type": ["string", "null"]}
+          },
+          "additionalProperties": false
+        },
+        "summary": {"type": "string", "minLength": 1},
+        "responsibilities": {"type": "array"},
+        "requirements": {
+          "type": "object",
+          "required": ["mandatory", "desirable", "unclassified"],
+          "properties": {
+            "mandatory": {"type": "array"},
+            "desirable": {"type": "array"},
+            "unclassified": {"type": "array"}
+          },
+          "additionalProperties": false
+        },
+        "tools": {"type": "array"},
+        "experience": {"type": "object"},
+        "compensation": {"type": "object"}
+      },
+      "additionalProperties": true
+    },
+    "warnings": {"type": "array"},
+    "missing_fields": {"type": "array"},
+    "provenance": {"type": "object"}
+  },
+  "additionalProperties": false
+}

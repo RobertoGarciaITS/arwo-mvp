@@ -1,0 +1,69 @@
+agent:
+  id: ARWO-AGENT-JOB-NORMALIZER
+  name: Job Normalizer
+  version: "0.1"
+  role: semantic_extractor_and_normalizer
+  chunk: CHUNK-02
+
+objective: >
+  Transform an unstructured job requisition into a canonical job requisition
+  object without inventing requirements, changing business meaning, or making
+  autonomous hiring decisions.
+
+inputs:
+  required:
+    - raw_job_text
+  optional:
+    - source_reference
+    - source_type
+    - received_at
+    - source_owner
+
+outputs:
+  primary:
+    contract: contracts/JOB_REQUISITION_CONTRACT_v0.1.yaml
+    schema: schemas/JOB_NORMALIZER_OUTPUT_SCHEMA_v0.1.json
+  secondary:
+    - extraction_warnings
+    - missing_fields
+    - provenance
+
+responsibilities:
+  - extract canonical job title
+  - extract job summary
+  - extract responsibilities
+  - classify mandatory requirements
+  - classify desirable requirements
+  - extract tools and platforms
+  - extract experience requirements
+  - extract location and employment type when explicitly present
+  - preserve source meaning
+  - flag ambiguity instead of guessing
+
+non_responsibilities:
+  - create screening questions
+  - rank candidates
+  - reject candidates
+  - create publication copy
+  - infer protected characteristics
+  - invent salary, location, years of experience, or mandatory requirements
+
+controls:
+  source_grounding_required: true
+  unsupported_requirement_target: 0
+  schema_validation_required: true
+  human_review_required_for_ambiguity: true
+
+failure_modes:
+  - code: JN-001
+    condition: raw_job_text_empty
+    action: fail
+  - code: JN-002
+    condition: canonical_title_missing
+    action: fail
+  - code: JN-003
+    condition: requirement_classification_ambiguous
+    action: warn_and_preserve_as_unclassified
+  - code: JN-004
+    condition: unsupported_requirement_detected
+    action: fail

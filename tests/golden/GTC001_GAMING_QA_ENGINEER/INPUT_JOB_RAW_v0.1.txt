@@ -1,0 +1,28 @@
+GOLDEN TEST FIXTURE — RECONSTRUCTED FROM THE OBSERVED RECRUITMENT FORM
+
+Position: Gaming QA Engineer
+
+Professional hands-on Multiplayer Game QA experience is mandatory.
+
+The candidate should have professional QA/testing experience and professional Game QA experience.
+
+Relevant multiplayer testing areas include:
+- Matchmaking
+- Player Synchronization
+- Real-time Gameplay
+- Network and Latency
+- Multiplayer Game Modes
+- Lobbies
+
+Relevant API testing tools referenced by the recruitment flow:
+- Postman
+- Swagger
+
+Relevant bug tracking / test management tools referenced by the recruitment flow:
+- Jira
+- ClickUp
+
+IMPORTANT TEST NOTE:
+This fixture is a controlled reconstruction from the user-provided recruitment form screenshots.
+It is not asserted to be the complete original vacancy text. The normalizer must not invent
+location, employment type, compensation, or minimum years of experience.
