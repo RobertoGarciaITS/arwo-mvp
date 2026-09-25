@@ -1,0 +1,45 @@
+phase:
+  id: PHASE-02
+  name: Runtime Integrations and Live E2E Pilot
+  version: "0.1"
+  status: planned
+
+objective: >
+  Convert the validated ARWO control-plane MVP into a working sandbox runtime
+  that creates and stores real operational artifacts while preserving all
+  existing QA, approval, hashing and release controls.
+
+workstreams:
+  - id: P2-W01
+    name: Runtime configuration and secrets
+  - id: P2-W02
+    name: Google Drive operational storage
+  - id: P2-W03
+    name: Google Forms live adapter
+  - id: P2-W04
+    name: Approval delivery and evidence capture
+  - id: P2-W05
+    name: Runtime workflow state persistence
+  - id: P2-W06
+    name: Sandbox E2E pilot
+  - id: P2-W07
+    name: Controlled external publication adapter
+
+gates:
+  - P2-GATE-01_runtime_security
+  - P2-GATE-02_drive_storage
+  - P2-GATE-03_forms_creation
+  - P2-GATE-04_approval_evidence
+  - P2-GATE-05_e2e_sandbox
+  - P2-GATE-06_live_pilot_authorization
+
+constraints:
+  - no_candidate_pii_in_github
+  - no_secrets_in_repository
+  - no_live_publication_using_synthetic_approval
+  - every_runtime_artifact_must_keep_job_id_and_version
+  - existing_phase_01_gates_remain_mandatory
+
+next_chunk:
+  id: P2-CHUNK-01
+  name: Runtime Configuration and Secrets Baseline
