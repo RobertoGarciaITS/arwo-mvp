@@ -56,7 +56,7 @@ def main() -> int:
     check(blocked, "HA-T009", "approval blocked when QA not ready", failures)
 
     fixture_marked = (
-        "GOLDEN_TEST" in approval["approval_id"]
+        "GOLDEN-TEST" in approval["approval_id"]
         and approval["reviewer"]["role"] == "synthetic_test_reviewer"
         and "Synthetic" in (approval["decision"]["comments"] or "")
     )
