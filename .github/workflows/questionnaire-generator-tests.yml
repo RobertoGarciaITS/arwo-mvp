@@ -1,0 +1,45 @@
+name: Questionnaire Generator Tests
+
+on:
+  pull_request:
+    paths:
+      - "agents/questionnaire_generator/**"
+      - "skills/questionnaire_generation/**"
+      - "prompts/QUESTIONNAIRE_GENERATOR_PROMPT_v0.1.md"
+      - "schemas/QUESTIONNAIRE_OUTPUT_SCHEMA_v0.1.json"
+      - "policies/QUESTION_MAPPING_RULES_v0.1.yaml"
+      - "tests/QUESTIONNAIRE_GENERATOR_TESTS_v0.1.yaml"
+      - "tests/golden/GTC001_GAMING_QA_ENGINEER/EXPECTED_QUESTIONNAIRE_v0.1.yaml"
+      - "scripts/validate_questionnaire_generator.py"
+      - ".github/workflows/questionnaire-generator-tests.yml"
+      - "requirements-dev.txt"
+  push:
+    branches:
+      - main
+    paths:
+      - "agents/questionnaire_generator/**"
+      - "skills/questionnaire_generation/**"
+      - "prompts/QUESTIONNAIRE_GENERATOR_PROMPT_v0.1.md"
+      - "schemas/QUESTIONNAIRE_OUTPUT_SCHEMA_v0.1.json"
+      - "policies/QUESTION_MAPPING_RULES_v0.1.yaml"
+      - "tests/QUESTIONNAIRE_GENERATOR_TESTS_v0.1.yaml"
+      - "tests/golden/GTC001_GAMING_QA_ENGINEER/EXPECTED_QUESTIONNAIRE_v0.1.yaml"
+      - "scripts/validate_questionnaire_generator.py"
+
+jobs:
+  validate-questionnaire-generator:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+
+      - name: Install validation dependencies
+        run: python -m pip install -r requirements-dev.txt
+
+      - name: Run deterministic Questionnaire Generator gate
+        run: python scripts/validate_questionnaire_generator.py
