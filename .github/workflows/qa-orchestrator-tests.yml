@@ -1,0 +1,40 @@
+name: QA Orchestrator Tests
+
+on:
+  pull_request:
+    paths:
+      - "agents/qa_orchestrator/**"
+      - "skills/qa_orchestration/**"
+      - "schemas/QA_REPORT_SCHEMA_v0.1.json"
+      - "tests/QA_ORCHESTRATOR_TESTS_v0.1.yaml"
+      - "scripts/run_qa_orchestrator.py"
+      - "scripts/validate_qa_orchestrator.py"
+      - "qa/QA_GATE_CONTRACT_v0.1.yaml"
+      - "governance/DATA_BOUNDARY_POLICY_v0.1.yaml"
+      - "tests/golden/GTC001_GAMING_QA_ENGINEER/**"
+      - ".github/workflows/qa-orchestrator-tests.yml"
+      - "requirements-dev.txt"
+  push:
+    branches: [main]
+    paths:
+      - "agents/qa_orchestrator/**"
+      - "skills/qa_orchestration/**"
+      - "schemas/QA_REPORT_SCHEMA_v0.1.json"
+      - "tests/QA_ORCHESTRATOR_TESTS_v0.1.yaml"
+      - "scripts/run_qa_orchestrator.py"
+      - "scripts/validate_qa_orchestrator.py"
+
+jobs:
+  validate-qa-orchestrator:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - name: Install validation dependencies
+        run: python -m pip install -r requirements-dev.txt
+      - name: Run QA Orchestrator gate
+        run: python scripts/validate_qa_orchestrator.py

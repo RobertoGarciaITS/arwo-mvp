@@ -1,0 +1,46 @@
+test_suite:
+  id: ARWO-QA-ORCH-TESTS-001
+  component: QA Orchestrator
+  version: "0.1"
+
+tests:
+  - id: QAO-T001
+    name: qa_report_schema_valid
+    blocking: true
+  - id: QAO-T002
+    name: six_preapproval_gates_present
+    blocking: true
+  - id: QAO-T003
+    name: job_completeness_pass
+    blocking: true
+  - id: QAO-T004
+    name: requirement_classification_pass
+    blocking: true
+  - id: QAO-T005
+    name: mandatory_question_coverage_100_percent
+    blocking: true
+  - id: QAO-T006
+    name: no_orphan_or_duplicate_questions
+    blocking: true
+  - id: QAO-T007
+    name: privacy_boundary_pass_or_observation
+    blocking: true
+  - id: QAO-T008
+    name: publication_consistency_pass_or_observation
+    blocking: true
+  - id: QAO-T009
+    name: no_blocking_findings
+    blocking: true
+  - id: QAO-T010
+    name: overall_ready_for_human_approval
+    blocking: true
+  - id: QAO-T011
+    name: gate_07_not_executed
+    blocking: true
+  - id: QAO-T012
+    name: cross_artifact_job_id_consistent
+    blocking: true
+
+gate:
+  id: QA-ORCHESTRATOR-GATE
+  pass_condition: all_blocking_tests_pass
