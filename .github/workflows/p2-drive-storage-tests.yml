@@ -1,0 +1,38 @@
+name: Phase 02 Drive Storage Tests
+
+on:
+  pull_request:
+    paths:
+      - "integrations/google_drive/**"
+      - "governance/DRIVE_DATA_CLASSIFICATION_POLICY_v0.1.yaml"
+      - "governance/DRIVE_FOLDER_ACCESS_MATRIX_v0.1.yaml"
+      - "schemas/DRIVE_JOB_STORAGE_MANIFEST_SCHEMA_v0.1.json"
+      - "tests/P2_DRIVE_STORAGE_TESTS_v0.1.yaml"
+      - "tests/golden/GTC001_GAMING_QA_ENGINEER/EXPECTED_DRIVE_STORAGE_MANIFEST_v0.1.yaml"
+      - "scripts/validate_drive_storage.py"
+      - ".github/workflows/p2-drive-storage-tests.yml"
+      - "requirements-dev.txt"
+  push:
+    branches: [main]
+    paths:
+      - "integrations/google_drive/**"
+      - "governance/DRIVE_DATA_CLASSIFICATION_POLICY_v0.1.yaml"
+      - "governance/DRIVE_FOLDER_ACCESS_MATRIX_v0.1.yaml"
+      - "schemas/DRIVE_JOB_STORAGE_MANIFEST_SCHEMA_v0.1.json"
+      - "tests/golden/GTC001_GAMING_QA_ENGINEER/EXPECTED_DRIVE_STORAGE_MANIFEST_v0.1.yaml"
+      - "scripts/validate_drive_storage.py"
+
+jobs:
+  validate-drive-storage:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - name: Install validation dependencies
+        run: python -m pip install -r requirements-dev.txt
+      - name: Run Drive storage gate
+        run: python scripts/validate_drive_storage.py
