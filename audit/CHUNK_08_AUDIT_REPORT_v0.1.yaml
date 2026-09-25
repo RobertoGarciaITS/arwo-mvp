@@ -1,0 +1,61 @@
+audit:
+  id: ARWO-AUD-CHUNK-08-001
+  chunk_id: CHUNK-08
+  name: Controlled Publication
+  version: "0.1"
+  repository: RobertoGarciaITS/arwo-mvp
+  branch: feature/arwo-chunk-08-release-gate
+  pr: 8
+
+artifacts_reviewed:
+  - integrations/publication/CONTROLLED_PUBLICATION_CONTRACT_v0.1.yaml
+  - skills/controlled_publication/SKILL.md
+  - policies/CONTROLLED_PUBLICATION_POLICY_v0.1.yaml
+  - schemas/PUBLICATION_EXECUTION_PLAN_SCHEMA_v0.1.json
+  - tests/CONTROLLED_PUBLICATION_TESTS_v0.1.yaml
+  - scripts/build_publication_execution_plan.py
+  - scripts/validate_controlled_publication.py
+  - .github/workflows/controlled-publication-tests.yml
+  - audit/CHUNK_08_PREFLIGHT_v0.1.yaml
+
+ci_evidence:
+  workflow_name: Controlled Publication Tests
+  run_id: 36161159337
+  job_id: 108157778371
+  head_sha: c7d6e8fa21cf4ea9172c71bf713955cfefa78801
+  gate: CONTROLLED-PUBLICATION-GATE
+  gate_result: PASS
+  blocking_tests: 0
+  release_state: READY_FOR_CONTROLLED_EXECUTION
+  external_action_executed: false
+
+test_results:
+  CP-T001_execution_plan_schema_valid: PASS
+  CP-T002_approved_status_required: PASS
+  CP-T003_gate_07_pass_required: PASS
+  CP-T004_exact_manifest_match_required: PASS
+  CP-T005_all_artifact_hashes_match: PASS
+  CP-T006_authorized_channel_required: PASS
+  CP-T007_idempotency_key_deterministic: PASS
+  CP-T008_artifact_mutation_blocks_execution: PASS
+  CP-T009_unauthorized_channel_blocks_execution: PASS
+  CP-T010_static_ci_never_executes_external_action: PASS
+  CP-T011_synthetic_fixture_explicitly_nonproduction: PASS
+  CP-T012_ready_state_when_all_release_checks_pass: PASS
+
+observations:
+  - id: OBS-08-001
+    severity: info
+    text: The release mechanism is validated, but no real external publication was performed.
+  - id: OBS-08-002
+    severity: info
+    text: GTC-001 uses a synthetic approval and therefore cannot authorize a real production post.
+  - id: OBS-08-003
+    severity: info
+    text: Runtime publication still requires a real human approval, an authorized channel adapter, and credentials from an approved secret store.
+
+gate:
+  id: CONTROLLED-PUBLICATION-GATE
+  result: PASS
+  blockers: 0
+  mvp_architecture_status: COMPLETE
