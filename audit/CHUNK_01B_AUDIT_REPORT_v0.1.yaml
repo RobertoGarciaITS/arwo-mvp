@@ -1,0 +1,55 @@
+audit:
+  id: ARWO-AUD-CHUNK-01B-001
+  chunk_id: CHUNK-01B
+  name: Repository Bootstrap & Governance
+  version: "0.1"
+  repository: RobertoGarciaITS/arwo-mvp
+  branch: architecture/arwo-chunk-01b-repository-bootstrap
+
+checks:
+  - id: AUD-001
+    description: required top-level governed paths exist
+    result: pass
+  - id: AUD-002
+    description: architecture baseline exists
+    result: pass
+    evidence:
+      - architecture/PROJECT_CHARTER_v0.1.yaml
+      - architecture/HLD_v0.1.md
+  - id: AUD-003
+    description: core contracts exist
+    result: pass
+    count: 5
+  - id: AUD-004
+    description: schema and question policy exist
+    result: pass
+  - id: AUD-005
+    description: governance control plane exists
+    result: pass
+    count: 6
+  - id: AUD-006
+    description: QA contract and traceability path exist
+    result: pass
+  - id: AUD-007
+    description: Golden Test Case GTC-001 exists
+    result: pass
+  - id: AUD-008
+    description: candidate PII and secrets are excluded by policy and gitignore
+    result: pass
+  - id: AUD-009
+    description: placeholder paths exist for agents skills prompts and integrations
+    result: pass
+
+observations:
+  - id: OBS-001
+    severity: info
+    text: Repository was initially empty, so one seed README commit on main was required before creating the governed working branch.
+  - id: OBS-002
+    severity: warning
+    text: Repository visibility is public. The current baseline contains no candidate PII or secrets, but future contributors must enforce DATA_BOUNDARY_POLICY_v0.1.
+
+gate:
+  id: REPOSITORY-BASELINE
+  result: PASS
+  blockers: 0
+  next_chunk: CHUNK-02
