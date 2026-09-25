@@ -1,0 +1,40 @@
+test_suite:
+  id: ARWO-P2-DRIVE-STORAGE-001
+  component: Google Drive Operational Storage
+  version: "0.1"
+
+tests:
+  - id: P2DS-T001
+    name: required_job_folder_structure_defined
+    blocking: true
+  - id: P2DS-T002
+    name: candidate_and_response_folders_restricted
+    blocking: true
+  - id: P2DS-T003
+    name: approvals_folder_restricted
+    blocking: true
+  - id: P2DS-T004
+    name: candidate_pii_prohibited_in_github
+    blocking: true
+  - id: P2DS-T005
+    name: public_link_sharing_prohibited_for_candidate_pii
+    blocking: true
+  - id: P2DS-T006
+    name: controlled_artifacts_require_version_and_checksum
+    blocking: true
+  - id: P2DS-T007
+    name: runtime_service_access_is_controlled
+    blocking: true
+  - id: P2DS-T008
+    name: manifest_schema_valid
+    blocking: true
+  - id: P2DS-T009
+    name: source_folder_marked_immutable
+    blocking: true
+  - id: P2DS-T010
+    name: real_candidate_data_forbidden_in_test_fixtures
+    blocking: true
+
+gate:
+  id: P2-GATE-02-DRIVE-STORAGE
+  pass_condition: all_blocking_tests_pass
