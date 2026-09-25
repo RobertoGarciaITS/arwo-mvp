@@ -2,7 +2,7 @@ phase:
   id: PHASE-02
   name: Runtime Integrations and Live E2E Pilot
   version: "0.1"
-  status: planned
+  status: in_progress
 
 objective: >
   Convert the validated ARWO control-plane MVP into a working sandbox runtime
@@ -40,6 +40,11 @@ constraints:
   - every_runtime_artifact_must_keep_job_id_and_version
   - existing_phase_01_gates_remain_mandatory
 
-next_chunk:
+current_chunk:
   id: P2-CHUNK-01
   name: Runtime Configuration and Secrets Baseline
+  status: completed
+
+next_chunk:
+  id: P2-CHUNK-02
+  name: Google Drive Operational Storage
