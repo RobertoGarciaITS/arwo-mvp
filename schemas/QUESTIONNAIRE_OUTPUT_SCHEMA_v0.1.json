@@ -1,0 +1,74 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "urn:arwo:questionnaire-output:v0.1",
+  "title": "ARWO Questionnaire Generator Output",
+  "type": "object",
+  "required": ["questionnaire_id", "job_id", "version", "profile", "sections", "coverage", "warnings"],
+  "properties": {
+    "questionnaire_id": {"type": "string", "minLength": 1},
+    "job_id": {"type": "string", "minLength": 1},
+    "version": {"type": "string"},
+    "profile": {"type": "string"},
+    "sections": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": ["section_id", "title", "questions"],
+        "properties": {
+          "section_id": {"type": "string"},
+          "title": {"type": "string"},
+          "questions": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "required": [
+                "question_id", "label", "intent", "type", "required",
+                "source_origin", "source_requirement_ids", "source_tool_names",
+                "analytics_key", "knockout"
+              ],
+              "properties": {
+                "question_id": {"type": "string"},
+                "label": {"type": "string"},
+                "help_text": {"type": ["string", "null"]},
+                "intent": {"type": "string"},
+                "type": {"type": "string"},
+                "required": {"type": "boolean"},
+                "options": {"type": "array", "items": {"type": "string"}},
+                "source_origin": {"enum": ["job_requirement", "job_tool", "system_policy"]},
+                "source_requirement_ids": {"type": "array", "items": {"type": "string"}},
+                "source_tool_names": {"type": "array", "items": {"type": "string"}},
+                "analytics_key": {"type": "string"},
+                "validation": {"type": "object"},
+                "knockout": {
+                  "type": "object",
+                  "required": ["enabled", "reject_when"],
+                  "properties": {
+                    "enabled": {"type": "boolean"},
+                    "reject_when": {"type": ["string", "null"]}
+                  },
+                  "additionalProperties": false
+                }
+              },
+              "additionalProperties": true
+            }
+          }
+        },
+        "additionalProperties": false
+      }
+    },
+    "coverage": {
+      "type": "object",
+      "required": [
+        "mandatory_screening_requirements_total",
+        "mandatory_screening_requirements_covered",
+        "mandatory_screening_coverage_percent",
+        "orphan_technical_questions",
+        "unsupported_technical_questions",
+        "invalid_knockout_rules",
+        "duplicate_semantic_questions"
+      ]
+    },
+    "warnings": {"type": "array"}
+  },
+  "additionalProperties": false
+}
