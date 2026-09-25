@@ -1,0 +1,93 @@
+component:
+  id: ARWO-GOOGLE-DRIVE-STORAGE
+  name: Google Drive Operational Storage
+  version: "0.1"
+  phase: PHASE-02
+  chunk: P2-CHUNK-02
+
+objective: >
+  Define the operational storage model for ARWO job packages, approval evidence,
+  form artifacts, candidate documents and application responses while keeping
+  GitHub restricted to technical control-plane content.
+
+root:
+  logical_env_var: ARWO_DRIVE_ROOT_FOLDER_ID
+  required_at_runtime: true
+
+job_folder_pattern:
+  template: JOB-{job_id}
+  required_children:
+    - source
+    - normalized
+    - forms
+    - publications
+    - approvals
+    - candidates
+    - responses
+    - audit
+
+data_classification:
+  source:
+    class: operational_source
+    pii_expected: false
+  normalized:
+    class: derived_operational_artifact
+    pii_expected: false
+  forms:
+    class: integration_artifact
+    pii_expected: false
+  publications:
+    class: publication_artifact
+    pii_expected: false
+  approvals:
+    class: approval_evidence
+    pii_expected: possible
+  candidates:
+    class: candidate_pii
+    pii_expected: true
+  responses:
+    class: candidate_pii
+    pii_expected: true
+  audit:
+    class: operational_audit
+    pii_expected: minimized
+
+naming:
+  artifact_pattern: "{job_id}__{artifact_type}__v{version}.{ext}"
+  immutable_source_prefix: "source__"
+  checksum_sidecar_suffix: ".sha256"
+
+controls:
+  job_id_required: true
+  version_required: true
+  source_immutable: true
+  candidate_pii_never_synced_to_github: true
+  candidate_resume_access_restricted: true
+  approval_evidence_access_restricted: true
+  public_link_sharing_prohibited_for_candidate_pii: true
+  checksum_required_for_controlled_artifacts: true
+  least_privilege_required: true
+
+non_responsibilities:
+  - ATS replacement
+  - long_term_data_warehouse
+  - candidate_scoring
+  - publication
+  - secret_storage
+
+failure_modes:
+  - code: DS-001
+    condition: root_folder_id_missing
+    action: fail
+  - code: DS-002
+    condition: job_folder_structure_incomplete
+    action: fail
+  - code: DS-003
+    condition: candidate_pii_targeted_to_github
+    action: fail
+  - code: DS-004
+    condition: public_link_detected_on_restricted_folder
+    action: fail
+  - code: DS-005
+    condition: controlled_artifact_missing_version_or_checksum
+    action: fail

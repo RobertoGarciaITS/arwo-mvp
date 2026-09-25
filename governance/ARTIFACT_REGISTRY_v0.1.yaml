@@ -104,4 +104,28 @@ artifacts:
     path: audit/P2_CHUNK_01_AUDIT_REPORT_v0.1.yaml
     type: audit_report
     status: pass
+  - id: ARWO-P2-INT-001
+    path: integrations/google_drive/DRIVE_STORAGE_CONTRACT_v0.1.yaml
+    type: drive_storage_contract
+    status: governing_baseline
+  - id: ARWO-P2-GOV-005
+    path: governance/DRIVE_DATA_CLASSIFICATION_POLICY_v0.1.yaml
+    type: drive_data_classification_policy
+    status: governing_baseline
+  - id: ARWO-P2-GOV-006
+    path: governance/DRIVE_FOLDER_ACCESS_MATRIX_v0.1.yaml
+    type: drive_access_matrix
+    status: governing_baseline
+  - id: ARWO-P2-SCH-002
+    path: schemas/DRIVE_JOB_STORAGE_MANIFEST_SCHEMA_v0.1.json
+    type: drive_storage_manifest_schema
+    status: baseline
+  - id: ARWO-P2-TST-002
+    path: tests/P2_DRIVE_STORAGE_TESTS_v0.1.yaml
+    type: test_contract
+    status: baseline
+  - id: ARWO-P2-AUD-002
+    path: audit/P2_CHUNK_02_AUDIT_REPORT_v0.1.yaml
+    type: audit_report
+    status: pass
 

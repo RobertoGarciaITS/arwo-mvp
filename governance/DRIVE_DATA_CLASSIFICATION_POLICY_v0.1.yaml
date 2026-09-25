@@ -1,0 +1,39 @@
+policy:
+  id: ARWO-DRIVE-DATA-CLASSIFICATION
+  version: "0.1"
+
+classes:
+  public_or_publishable:
+    examples:
+      - approved_job_post
+    github_allowed: true
+    drive_allowed: true
+  internal_operational:
+    examples:
+      - normalized_job_contract
+      - form_build_spec
+      - qa_report
+    github_allowed: true
+    drive_allowed: true
+  restricted_operational:
+    examples:
+      - approval_evidence
+      - operational_reviewer_identity
+    github_allowed: false
+    drive_allowed: true
+  candidate_pii:
+    examples:
+      - resume
+      - phone_number
+      - personal_email
+      - application_response
+    github_allowed: false
+    drive_allowed: true
+
+rules:
+  minimize_duplicate_storage: true
+  github_is_not_operational_record_store: true
+  real_candidate_data_never_in_test_fixtures: true
+  restricted_folder_public_sharing: prohibited
+  candidate_pii_public_sharing: prohibited
+  access_review_required_for_restricted_classes: true

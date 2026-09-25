@@ -11,11 +11,12 @@ phase_02_chunks:
       gate_result: PASS
     - id: P2-CHUNK-02
       name: Google Drive Operational Storage
-      status: ready
+      status: completed
       gate: P2-GATE-02-DRIVE-STORAGE
+      gate_result: PASS
     - id: P2-CHUNK-03
       name: Google Forms Live Adapter
-      status: planned
+      status: ready
       gate: P2-GATE-03-FORMS-CREATION
     - id: P2-CHUNK-04
       name: Approval Delivery and Evidence Capture

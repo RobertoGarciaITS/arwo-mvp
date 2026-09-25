@@ -1,0 +1,35 @@
+preflight:
+  phase: PHASE-02
+  chunk_id: P2-CHUNK-02
+  name: Google Drive Operational Storage
+  version: "0.1"
+
+dependencies:
+  - audit/P2_CHUNK_01_AUDIT_REPORT_v0.1.yaml
+  - governance/DATA_BOUNDARY_POLICY_v0.1.yaml
+  - architecture/RUNTIME_CONFIGURATION_CONTRACT_v0.1.yaml
+
+checks:
+  - id: P2PF-02-001
+    description: runtime security gate passed
+    result: pass
+  - id: P2PF-02-002
+    description: Google Drive designated operational storage
+    result: pass
+  - id: P2PF-02-003
+    description: candidate PII boundary defined
+    result: pass
+  - id: P2PF-02-004
+    description: folder access matrix defined
+    result: pass
+  - id: P2PF-02-005
+    description: storage manifest schema defined
+    result: pass
+  - id: P2PF-02-006
+    description: no live Drive writes required for static gate
+    result: pass
+
+gate:
+  result: PASS
+  blockers: 0
+  next_action: implement deterministic Drive storage validator

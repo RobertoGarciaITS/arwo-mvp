@@ -1,0 +1,56 @@
+matrix:
+  id: ARWO-DRIVE-FOLDER-ACCESS
+  version: "0.1"
+
+roles:
+  hiring_manager:
+    source: read
+    normalized: read
+    forms: read
+    publications: read
+    approvals: read
+    candidates: none
+    responses: none
+    audit: read
+  recruiter:
+    source: write
+    normalized: write
+    forms: write
+    publications: write
+    approvals: write
+    candidates: read
+    responses: read
+    audit: read
+  hr_reviewer:
+    source: read
+    normalized: read
+    forms: read
+    publications: read
+    approvals: write
+    candidates: read
+    responses: read
+    audit: read
+  qa_reviewer:
+    source: read
+    normalized: read
+    forms: read
+    publications: read
+    approvals: read
+    candidates: none
+    responses: none
+    audit: read
+  runtime_service:
+    source: write
+    normalized: write
+    forms: write
+    publications: write
+    approvals: write
+    candidates: controlled
+    responses: controlled
+    audit: write
+
+controls:
+  default_access: none
+  inheritance_must_not_make_restricted_folders_public: true
+  candidate_folders_require_restricted_access: true
+  approvals_folder_requires_restricted_access: true

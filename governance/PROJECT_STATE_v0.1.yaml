@@ -2,7 +2,7 @@ project_state:
   project_id: ARWO
   version: "0.1"
   current_phase: phase_02_runtime_integrations
-  current_chunk: P2-CHUNK-01
+  current_chunk: P2-CHUNK-02
   source_of_truth_target: github
 
 phase_01:
@@ -11,7 +11,7 @@ phase_01:
 
 phase_02_progress:
   runtime_configuration_and_secrets: 100
-  drive_operational_storage: 0
+  drive_operational_storage: 100
   forms_live_adapter: 0
   approval_delivery: 0
   runtime_state_persistence: 0
@@ -19,16 +19,16 @@ phase_02_progress:
   external_publication_adapter: 0
 
 last_gate:
-  id: P2-GATE-01-RUNTIME-SECURITY
+  id: P2-GATE-02-DRIVE-STORAGE
   result: PASS
 
 runtime_status:
   real_gcp_resources_created: false
-  real_secrets_created: false
-  real_oauth_credentials_configured: false
-  note: Static security and configuration baseline is complete.
+  real_drive_folders_created: false
+  real_google_forms_created: false
+  note: Static Drive storage model and data-boundary controls are complete.
 
 next_chunk:
-  id: P2-CHUNK-02
-  name: Google Drive Operational Storage
+  id: P2-CHUNK-03
+  name: Google Forms Live Adapter
   status: READY

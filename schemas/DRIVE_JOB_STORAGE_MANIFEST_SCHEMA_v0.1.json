@@ -1,0 +1,54 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "urn:arwo:drive-job-storage-manifest:v0.1",
+  "title": "ARWO Drive Job Storage Manifest",
+  "type": "object",
+  "required": [
+    "job_id", "environment", "root_folder_id",
+    "job_folder_name", "folders", "artifacts"
+  ],
+  "properties": {
+    "job_id": {"type": "string", "minLength": 1},
+    "environment": {"enum": ["sandbox", "production"]},
+    "root_folder_id": {"type": "string", "minLength": 1},
+    "job_folder_name": {"type": "string", "minLength": 1},
+    "folders": {
+      "type": "object",
+      "required": [
+        "source","normalized","forms","publications",
+        "approvals","candidates","responses","audit"
+      ],
+      "additionalProperties": {
+        "type": "object",
+        "required": ["folder_id","classification","restricted"],
+        "properties": {
+          "folder_id": {"type": "string"},
+          "classification": {"type": "string"},
+          "restricted": {"type": "boolean"}
+        },
+        "additionalProperties": false
+      }
+    },
+    "artifacts": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": [
+          "artifact_id","artifact_type","version","folder",
+          "filename","sha256","contains_candidate_pii"
+        ],
+        "properties": {
+          "artifact_id": {"type": "string"},
+          "artifact_type": {"type": "string"},
+          "version": {"type": "string"},
+          "folder": {"type": "string"},
+          "filename": {"type": "string"},
+          "sha256": {"type": "string","pattern": "^[a-f0-9]{64}$"},
+          "contains_candidate_pii": {"type": "boolean"}
+        },
+        "additionalProperties": false
+      }
+    }
+  },
+  "additionalProperties": false
+}
