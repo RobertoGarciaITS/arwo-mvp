@@ -1,0 +1,205 @@
+golden_test_case:
+  id: GTC-001
+  name: Gaming QA Engineer
+  source: user_provided_form_screenshots
+  purpose: validate_end_to_end_generation
+
+job_contract:
+  job_id: JOB-GQA-001
+  job:
+    title:
+      raw: Gaming QA Engineer
+      canonical: Gaming QA Engineer
+    summary: >
+      Professional QA role requiring hands-on multiplayer game testing experience.
+    responsibilities:
+      - id: RESP-001
+        text: Validate multiplayer game functionality and player experience.
+    requirements:
+      mandatory:
+        - id: REQ-001
+          text: Professional QA/Testing experience
+          category: general_qa
+          screening_required: true
+          knockout: false
+        - id: REQ-002
+          text: Professional Game QA experience
+          category: game_qa
+          screening_required: true
+          knockout: false
+        - id: REQ-003
+          text: Professional Multiplayer Game Testing experience
+          category: multiplayer_qa
+          screening_required: true
+          knockout: true
+      desirable:
+        - id: REQ-004
+          text: Experience testing multiplayer systems and features
+          category: multiplayer_features
+    tools:
+      - name: Postman
+        category: api_testing
+        required: false
+      - name: Swagger
+        category: api_testing
+        required: false
+      - name: Jira
+        category: bug_tracking
+        required: false
+      - name: ClickUp
+        category: test_management
+        required: false
+
+questionnaire:
+  questionnaire_id: FORM-GQA-001
+  sections:
+    - section_id: candidate_information
+      title: Candidate Information
+      questions:
+        - question_id: Q-001
+          source_requirement_ids: []
+          label: Name
+          intent: identity
+          type: short_text
+          required: true
+          analytics_key: candidate_name
+        - question_id: Q-002
+          source_requirement_ids: []
+          label: Contact Number
+          intent: contact
+          type: phone
+          required: true
+          analytics_key: contact_number
+        - question_id: Q-003
+          source_requirement_ids: []
+          label: Current Location
+          intent: contact
+          type: short_text
+          required: true
+          analytics_key: current_location
+
+    - section_id: experience
+      title: Professional Experience
+      questions:
+        - question_id: Q-004
+          source_requirement_ids: [REQ-001]
+          label: Total Professional QA/Testing Experience
+          intent: experience
+          type: integer
+          required: true
+          analytics_key: qa_years
+        - question_id: Q-005
+          source_requirement_ids: [REQ-002]
+          label: Total Game QA Experience
+          intent: experience
+          type: integer
+          required: true
+          analytics_key: game_qa_years
+        - question_id: Q-006
+          source_requirement_ids: [REQ-003]
+          label: Do you have professional Multiplayer Game Testing experience?
+          intent: eligibility
+          type: single_choice
+          required: true
+          options: [Yes, No]
+          knockout:
+            enabled: true
+            reject_when: answer == "No"
+          analytics_key: professional_multiplayer_qa
+        - question_id: Q-007
+          source_requirement_ids: [REQ-003]
+          label: Name the multiplayer games you professionally tested
+          intent: evidence
+          type: paragraph
+          required: true
+          analytics_key: multiplayer_titles
+
+    - section_id: technical
+      title: Technical Coverage
+      questions:
+        - question_id: Q-008
+          source_requirement_ids: [REQ-004]
+          label: Which multiplayer features have you personally tested?
+          intent: technical_coverage
+          type: multi_choice
+          required: true
+          options:
+            - Matchmaking
+            - Player Synchronization
+            - Real-time Gameplay
+            - Network & Latency
+            - Multiplayer Game Modes
+            - Lobbies
+            - Other
+          analytics_key: multiplayer_features
+        - question_id: Q-009
+          source_requirement_ids: []
+          label: API Testing Experience
+          intent: tool_proficiency
+          type: single_choice
+          required: true
+          options: [Postman, Swagger, None]
+          analytics_key: api_testing_tool
+        - question_id: Q-010
+          source_requirement_ids: []
+          label: Bug Tracking / Test Management Tools
+          intent: tool_proficiency
+          type: single_choice
+          required: true
+          options: [Jira, ClickUp, Other]
+          analytics_key: test_management_tool
+
+    - section_id: logistics
+      title: Compensation and Availability
+      questions:
+        - question_id: Q-011
+          source_requirement_ids: []
+          label: Current Salary
+          intent: compensation
+          type: decimal
+          required: true
+          analytics_key: current_salary
+        - question_id: Q-012
+          source_requirement_ids: []
+          label: Expected Salary
+          intent: compensation
+          type: decimal
+          required: true
+          analytics_key: expected_salary
+        - question_id: Q-013
+          source_requirement_ids: []
+          label: Notice Period
+          intent: availability
+          type: dropdown
+          required: true
+          options:
+            - Immediate
+            - 1 week
+            - 2 weeks
+            - 30 days
+            - 60 days
+            - 90+ days
+          analytics_key: notice_period
+        - question_id: Q-014
+          source_requirement_ids: []
+          label: LinkedIn Profile Link
+          intent: professional_profile
+          type: url
+          required: true
+          analytics_key: linkedin_url
+        - question_id: Q-015
+          source_requirement_ids: []
+          label: Upload Updated Resume
+          intent: document_upload
+          type: file_upload_manual_template
+          required: true
+          analytics_key: resume_file
+
+expected_gates:
+  GATE_01_job_completeness: pass
+  GATE_02_requirement_classification: pass
+  GATE_03_question_coverage: pass
+  GATE_04_question_consistency: pass
+  GATE_05_privacy_review: pass_with_observation
+  GATE_06_publication_consistency: pending
+  GATE_07_human_approval: pending
