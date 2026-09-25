@@ -1,0 +1,40 @@
+test_suite:
+  id: ARWO-P2-RUNTIME-SECURITY-001
+  component: Runtime Configuration and Secrets Baseline
+  version: "0.1"
+
+tests:
+  - id: P2RS-T001
+    name: runtime_config_schema_valid
+    blocking: true
+  - id: P2RS-T002
+    name: example_environment_is_sandbox
+    blocking: true
+  - id: P2RS-T003
+    name: publication_disabled_by_default
+    blocking: true
+  - id: P2RS-T004
+    name: no_secret_values_in_example
+    blocking: true
+  - id: P2RS-T005
+    name: all_registered_secrets_forbid_git_values
+    blocking: true
+  - id: P2RS-T006
+    name: production_requires_real_human_approval_policy
+    blocking: true
+  - id: P2RS-T007
+    name: runtime_service_not_project_owner
+    blocking: true
+  - id: P2RS-T008
+    name: deployer_and_runtime_identity_separated
+    blocking: true
+  - id: P2RS-T009
+    name: candidate_pii_remains_outside_github
+    blocking: true
+  - id: P2RS-T010
+    name: secret_reference_names_are_defined
+    blocking: true
+
+gate:
+  id: P2-GATE-01-runtime-security
+  pass_condition: all_blocking_tests_pass
