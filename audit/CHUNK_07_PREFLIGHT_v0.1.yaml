@@ -1,0 +1,37 @@
+preflight:
+  chunk_id: CHUNK-07
+  name: Human Approval
+  version: "0.1"
+
+dependencies:
+  - contracts/APPROVAL_CONTRACT_v0.1.yaml
+  - audit/CHUNK_06_AUDIT_REPORT_v0.1.yaml
+  - schemas/QA_REPORT_SCHEMA_v0.1.json
+  - tests/golden/GTC001_GAMING_QA_ENGINEER/EXPECTED_JOB_NORMALIZED_v0.1.yaml
+  - tests/golden/GTC001_GAMING_QA_ENGINEER/EXPECTED_QUESTIONNAIRE_v0.1.yaml
+  - tests/golden/GTC001_GAMING_QA_ENGINEER/EXPECTED_PUBLICATION_v0.1.yaml
+
+checks:
+  - id: PF-07-001
+    description: QA Orchestrator gate passed
+    result: pass
+  - id: PF-07-002
+    description: approval contract exists
+    result: pass
+  - id: PF-07-003
+    description: approval output schema defined
+    result: pass
+  - id: PF-07-004
+    description: exact artifact hashing strategy defined
+    result: pass
+  - id: PF-07-005
+    description: mutation invalidation rule defined
+    result: pass
+  - id: PF-07-006
+    description: golden approval is synthetic and not a real human decision
+    result: pass
+
+gate:
+  result: PASS
+  blockers: 0
+  next_action: implement approval manifest generator and mutation tests
