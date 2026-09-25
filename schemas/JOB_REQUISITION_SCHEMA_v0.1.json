@@ -1,0 +1,41 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "urn:arwo:job-requisition:v0.1",
+  "title": "ARWO Job Requisition",
+  "type": "object",
+  "required": ["job_id", "source", "job"],
+  "properties": {
+    "job_id": {"type": "string", "minLength": 1},
+    "source": {
+      "type": "object",
+      "required": ["source_type", "source_reference"],
+      "properties": {
+        "source_type": {"enum": ["plain_text", "email", "docx", "pdf", "google_doc", "other"]},
+        "source_reference": {"type": "string"}
+      }
+    },
+    "job": {
+      "type": "object",
+      "required": ["title", "summary", "requirements"],
+      "properties": {
+        "title": {
+          "type": "object",
+          "required": ["canonical"],
+          "properties": {
+            "raw": {"type": "string"},
+            "canonical": {"type": "string", "minLength": 1}
+          }
+        },
+        "summary": {"type": "string", "minLength": 1},
+        "requirements": {
+          "type": "object",
+          "required": ["mandatory", "desirable"],
+          "properties": {
+            "mandatory": {"type": "array"},
+            "desirable": {"type": "array"}
+          }
+        }
+      }
+    }
+  }
+}
