@@ -1,0 +1,50 @@
+contract:
+  id: ARWO-RUNTIME-CONFIGURATION
+  version: "0.1"
+  phase: PHASE-02
+  chunk: P2-CHUNK-01
+
+objective: >
+  Define the runtime configuration boundary for ARWO without placing secrets,
+  candidate PII, or environment-specific credentials in GitHub.
+
+environments:
+  - local_dev
+  - sandbox
+  - production
+
+required_configuration:
+  project:
+    - ARWO_ENVIRONMENT
+    - ARWO_GCP_PROJECT_ID
+    - ARWO_REGION
+  runtime:
+    - ARWO_RUNTIME_SERVICE_NAME
+    - ARWO_LOG_LEVEL
+  integrations:
+    - ARWO_GOOGLE_FORMS_ENABLED
+    - ARWO_GOOGLE_DRIVE_ENABLED
+    - ARWO_GMAIL_ENABLED
+    - ARWO_PUBLICATION_ENABLED
+  non_secret_identifiers:
+    - ARWO_DRIVE_ROOT_FOLDER_ID
+    - ARWO_FORM_TEMPLATE_ID
+
+secret_references:
+  - ARWO_GOOGLE_OAUTH_CLIENT_SECRET
+  - ARWO_GOOGLE_OAUTH_REFRESH_TOKEN
+  - ARWO_PUBLICATION_ACCESS_TOKEN
+
+principles:
+  - secrets_are_referenced_not_stored
+  - production_defaults_to_fail_closed
+  - external_integrations_disabled_until_configured
+  - synthetic_approval_cannot_enable_production_publication
+  - environment_name_required
+  - region_required
+  - runtime_service_name_required
+
+runtime_validation:
+  schema: schemas/RUNTIME_CONFIG_SCHEMA_v0.1.json
+  startup_validation_required: true
+  invalid_configuration_action: fail_startup
