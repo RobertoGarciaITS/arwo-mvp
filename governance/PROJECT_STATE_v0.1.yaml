@@ -1,8 +1,8 @@
 project_state:
   project_id: ARWO
   version: "0.1"
-  current_phase: publication_readiness
-  current_chunk: CHUNK-07
+  current_phase: mvp_architecture_complete
+  current_chunk: CHUNK-08
   source_of_truth_target: github
 
 progress:
@@ -15,18 +15,22 @@ progress:
   publication: 100
   qa_orchestrator: 100
   approval_workflow: 100
-  controlled_publication: 0
+  controlled_publication: 100
 
 last_gate:
-  id: HUMAN-APPROVAL-GATE
+  id: CONTROLLED-PUBLICATION-GATE
   result: PASS
 
-approval_readiness:
-  mechanism_validated: true
+mvp_status:
+  architecture_and_control_plane: COMPLETE
+  deterministic_golden_path: PASS
+  production_external_integrations: NOT_EXECUTED
   production_human_approval_completed: false
-  note: Synthetic golden approval validates the mechanism only.
+  note: >
+    The MVP control architecture is complete. Real external publishing remains
+    intentionally unexecuted because GTC-001 uses synthetic approval evidence.
 
-next_chunk:
-  id: CHUNK-08
-  name: Controlled Publication
-  status: READY
+next_phase:
+  id: PHASE-02
+  name: Runtime Integrations and Live E2E Pilot
+  status: READY_FOR_PLANNING
