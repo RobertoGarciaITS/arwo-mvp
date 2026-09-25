@@ -1,0 +1,36 @@
+preflight:
+  phase: PHASE-02
+  chunk_id: P2-CHUNK-01
+  name: Runtime Configuration and Secrets Baseline
+  version: "0.1"
+
+dependencies:
+  - architecture/ARWO_MASTER_PROJECT_CONTRACT_v0.2.yaml
+  - architecture/PHASE_02_RUNTIME_INTEGRATION_CONTRACT_v0.1.yaml
+  - architecture/TECHNOLOGY_STACK_CONTRACT_v0.1.yaml
+  - governance/DATA_BOUNDARY_POLICY_v0.1.yaml
+
+checks:
+  - id: P2PF-001
+    description: Phase-01 control plane completed
+    result: pass
+  - id: P2PF-002
+    description: GCP selected as Phase-02 runtime cloud
+    result: pass
+  - id: P2PF-003
+    description: Secret Manager selected as secret store
+    result: pass
+  - id: P2PF-004
+    description: environment separation defined
+    result: pass
+  - id: P2PF-005
+    description: no real secret values required for static baseline
+    result: pass
+  - id: P2PF-006
+    description: production publication remains blocked without real human approval
+    result: pass
+
+gate:
+  result: PASS
+  blockers: 0
+  next_action: implement deterministic runtime-security validator
