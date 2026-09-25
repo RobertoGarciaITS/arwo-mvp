@@ -1,0 +1,37 @@
+template:
+  id: ARWO-GOOGLE-FORM-TEMPLATE-RESUME-V0.1
+  version: "0.1"
+  purpose: >
+    Provide the file-upload question that the Google Forms API cannot create.
+    All programmatically generated items are inserted before this template item.
+
+required_invariants:
+  initial_item_count: 1
+  item_0:
+    kind: fileUploadQuestion
+    semantic_key: resume_file
+    title: Upload Updated Resume
+    required: true
+  additional_items_allowed: false
+
+runtime_requirements:
+  - template_form_id must be configured outside Git
+  - template must be copied before mutation
+  - copied form must be read and invariants verified before batchUpdate
+  - generated createItem requests use indices starting at 0
+  - existing resume upload item is pushed to the final position
+  - original template must never be mutated
+
+failure_modes:
+  - code: FT-001
+    condition: template_form_id_missing_at_runtime
+    action: block_external_build
+  - code: FT-002
+    condition: template_item_count_not_equal_to_1
+    action: fail
+  - code: FT-003
+    condition: item_0_not_file_upload
+    action: fail
+  - code: FT-004
+    condition: template_upload_question_not_required
+    action: fail
