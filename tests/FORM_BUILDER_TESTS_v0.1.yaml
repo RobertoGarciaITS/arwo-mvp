@@ -1,0 +1,52 @@
+test_suite:
+  id: ARWO-FB-TESTS-001
+  component: Google Forms Form Builder
+  version: "0.1"
+
+tests:
+  - id: FB-T001
+    name: build_spec_schema_valid
+    blocking: true
+  - id: FB-T002
+    name: template_mode_selected_when_file_upload_present
+    blocking: true
+  - id: FB-T003
+    name: exactly_one_file_upload_deferred
+    blocking: true
+  - id: FB-T004
+    name: file_upload_not_emitted_as_create_item
+    blocking: true
+  - id: FB-T005
+    name: api_request_indices_sequential
+    blocking: true
+  - id: FB-T006
+    name: section_order_preserved
+    blocking: true
+  - id: FB-T007
+    name: emitted_question_order_preserved
+    blocking: true
+  - id: FB-T008
+    name: required_flags_preserved
+    blocking: true
+  - id: FB-T009
+    name: choice_options_preserved
+    blocking: true
+  - id: FB-T010
+    name: choice_types_mapped_correctly
+    blocking: true
+  - id: FB-T011
+    name: all_questions_traceable
+    blocking: true
+  - id: FB-T012
+    name: numeric_validation_limit_reported
+    blocking: true
+  - id: FB-T013
+    name: runtime_template_id_not_committed
+    blocking: true
+  - id: FB-T014
+    name: expected_request_count
+    blocking: true
+
+gate:
+  id: FORM-BUILDER-GATE
+  pass_condition: all_blocking_tests_pass
