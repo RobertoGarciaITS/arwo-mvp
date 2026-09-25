@@ -1,0 +1,54 @@
+registry:
+  project_id: ARWO
+  version: "0.1"
+  source_of_truth: github
+
+artifacts:
+  - id: ARWO-ARCH-001
+    path: architecture/PROJECT_CHARTER_v0.1.yaml
+    type: charter
+    status: baseline
+  - id: ARWO-ARCH-002
+    path: architecture/HLD_v0.1.md
+    type: architecture
+    status: baseline
+  - id: ARWO-CON-001
+    path: contracts/JOB_REQUISITION_CONTRACT_v0.1.yaml
+    type: contract
+    status: baseline
+  - id: ARWO-CON-002
+    path: contracts/QUESTIONNAIRE_CONTRACT_v0.1.yaml
+    type: contract
+    status: baseline
+  - id: ARWO-CON-003
+    path: contracts/PUBLICATION_CONTRACT_v0.1.yaml
+    type: contract
+    status: baseline
+  - id: ARWO-CON-004
+    path: contracts/APPROVAL_CONTRACT_v0.1.yaml
+    type: contract
+    status: baseline
+  - id: ARWO-CON-005
+    path: contracts/WORKFLOW_STATE_v0.1.yaml
+    type: contract
+    status: baseline
+  - id: ARWO-SCH-001
+    path: schemas/JOB_REQUISITION_SCHEMA_v0.1.json
+    type: schema
+    status: baseline
+  - id: ARWO-POL-001
+    path: policies/QUESTION_GENERATION_POLICY_v0.1.yaml
+    type: policy
+    status: baseline
+  - id: ARWO-QA-001
+    path: qa/QA_GATE_CONTRACT_v0.1.yaml
+    type: qa_contract
+    status: baseline
+  - id: ARWO-TST-001
+    path: tests/golden/GTC001_GAMING_QA_ENGINEER/GOLDEN_TEST_CASE_001_GAMING_QA_ENGINEER.yaml
+    type: golden_test
+    status: baseline
+  - id: ARWO-TRC-001
+    path: qa/traceability/TRACEABILITY_MATRIX_GTC001_v0.1.csv
+    type: traceability_matrix
+    status: baseline
