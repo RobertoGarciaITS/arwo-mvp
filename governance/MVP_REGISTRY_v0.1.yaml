@@ -1,0 +1,40 @@
+registry:
+  id: ARWO-MVP-REGISTRY
+  version: "0.1"
+
+mvps:
+  - id: MVP-0.1
+    name: Deterministic Control Plane
+    status: completed
+    exit_criteria:
+      - chunks_01_to_08_pass
+      - deterministic_golden_path_pass
+      - no_external_action_executed
+  - id: MVP-0.2
+    name: Runtime Integration
+    status: ready
+    exit_criteria:
+      - Google_Forms_adapter_works
+      - Google_Drive_operational_storage_works
+      - secrets_are_externalized
+      - runtime_state_is_persisted
+      - sandbox_end_to_end_pass
+  - id: MVP-0.3
+    name: Live E2E Pilot
+    status: planned
+    exit_criteria:
+      - real_requisition_ingested
+      - human_approval_recorded
+      - exact_manifest_verified
+      - approved_form_created
+      - controlled_publication_receipt_recorded
+  - id: MVP-1.0
+    name: Production Ready
+    status: future
+    exit_criteria:
+      - multi_job_support
+      - role_based_access
+      - observability
+      - error_recovery
+      - deployment_automation
+      - operational_runbook
