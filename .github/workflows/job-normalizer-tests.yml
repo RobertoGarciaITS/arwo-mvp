@@ -1,0 +1,44 @@
+name: Job Normalizer Tests
+
+on:
+  pull_request:
+    paths:
+      - "agents/job_normalizer/**"
+      - "skills/job_normalization/**"
+      - "prompts/JOB_NORMALIZER_PROMPT_v0.1.md"
+      - "schemas/JOB_NORMALIZER_OUTPUT_SCHEMA_v0.1.json"
+      - "tests/JOB_NORMALIZER_TESTS_v0.1.yaml"
+      - "tests/golden/GTC001_GAMING_QA_ENGINEER/**"
+      - "scripts/validate_job_normalizer.py"
+      - "requirements-dev.txt"
+      - ".github/workflows/job-normalizer-tests.yml"
+  push:
+    branches:
+      - main
+    paths:
+      - "agents/job_normalizer/**"
+      - "skills/job_normalization/**"
+      - "prompts/JOB_NORMALIZER_PROMPT_v0.1.md"
+      - "schemas/JOB_NORMALIZER_OUTPUT_SCHEMA_v0.1.json"
+      - "tests/JOB_NORMALIZER_TESTS_v0.1.yaml"
+      - "tests/golden/GTC001_GAMING_QA_ENGINEER/**"
+      - "scripts/validate_job_normalizer.py"
+      - "requirements-dev.txt"
+
+jobs:
+  validate-job-normalizer:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+
+      - name: Install validation dependencies
+        run: python -m pip install -r requirements-dev.txt
+
+      - name: Run deterministic Job Normalizer gate
+        run: python scripts/validate_job_normalizer.py
