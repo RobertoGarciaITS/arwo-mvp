@@ -1,0 +1,74 @@
+component:
+  id: ARWO-HUMAN-APPROVAL-ORCHESTRATOR
+  name: Human Approval Orchestrator
+  version: "0.1"
+  chunk: CHUNK-07
+  type: deterministic_approval_control
+
+objective: >
+  Bind a human approval decision to exact immutable versions and cryptographic
+  hashes of the pre-approved ARWO artifact package so that later publication
+  cannot use modified artifacts without a new approval.
+
+inputs:
+  required:
+    - qa_report
+    - canonical_job_requisition
+    - questionnaire_contract
+    - form_build_spec
+    - publication_contract
+  decision_input:
+    - reviewer_identity
+    - reviewer_role
+    - decision
+    - comments
+    - authorized_channels
+
+outputs:
+  - approval_request
+  - approval_manifest
+  - approval_decision
+  - gate_07_result
+
+preconditions:
+  qa_overall_result: READY_FOR_HUMAN_APPROVAL
+  blocking_findings: 0
+
+approval_states:
+  - pending
+  - changes_requested
+  - approved
+  - rejected
+
+controls:
+  hashes_required: true
+  hash_algorithm: sha256
+  decision_must_bind_exact_manifest: true
+  approval_required_for_publication: true
+  artifact_mutation_after_approval_requires_new_approval: true
+  reviewer_identity_required_for_approved_state: true
+  authorized_channels_required_for_approved_state: true
+
+non_responsibilities:
+  - selecting candidates
+  - publishing content
+  - changing artifacts during approval
+  - storing candidate responses
+  - inferring reviewer identity
+
+failure_modes:
+  - code: HA-001
+    condition: qa_not_ready_for_human_approval
+    action: block
+  - code: HA-002
+    condition: artifact_hash_missing
+    action: fail
+  - code: HA-003
+    condition: artifact_hash_mismatch
+    action: invalidate_approval
+  - code: HA-004
+    condition: approved_without_reviewer_identity
+    action: fail
+  - code: HA-005
+    condition: approved_without_authorized_channels
+    action: fail
